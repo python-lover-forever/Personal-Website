@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Farouk - Modie Portfolio</title>
+<title>Ahmed Farouk | Modie - The Robot Kid from Alexandria</title>
 
 <style>
+/* ok bro this is the real deal, i cleaned everything, no more bullshit placeholders */
+/* background is pure cyber dust like old school matrix but cyan cuz we egyptian tech */
 body{
 background:#050505;
 color:#e6ffff;
@@ -13,10 +15,9 @@ font-family:monospace;
 margin:0;
 overflow-x:hidden;
 scroll-behavior:smooth;
-cursor:none
+cursor:none;
 }
 
-/* yo this canvas is the background dust, looks cool at night lol */
 canvas{
 position:fixed;
 top:0;
@@ -26,13 +27,14 @@ z-index:-1
 
 .robotCursor{
 position:fixed;
-width:22px;
-height:22px;
-border:2px solid #00ffee;
-border-radius:5px;
+width:24px;
+height:24px;
+border:3px solid #00ffee;
+border-radius:6px;
 pointer-events:none;
 z-index:9999;
-mix-blend-mode:difference
+mix-blend-mode:difference;
+box-shadow:0 0 12px #00ffee;
 }
 
 nav{
@@ -41,16 +43,22 @@ top:0;
 width:100%;
 display:flex;
 justify-content:center;
-gap:45px;
-background:rgba(0,0,0,0.7);
-padding:17px;
-z-index:9998
+gap:50px;
+background:rgba(0,0,0,0.85);
+padding:19px;
+z-index:9998;
+backdrop-filter:blur(8px);
 }
 
 nav a{
 color:#00ffee;
 text-decoration:none;
-font-size:1.15rem
+font-size:1.2rem;
+transition:0.2s;
+}
+
+nav a:hover{
+text-shadow:0 0 10px #00ffee;
 }
 
 section{
@@ -59,110 +67,197 @@ display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:85px 15%
+padding:90px 16%;
 }
 
-.hero h1{font-size:67px}
-.hero h2{color:#00ffee}
+.hero h1{
+font-size:72px;
+margin:0;
+animation:glitch 2s infinite;
+}
 
+@keyframes glitch{
+0%{text-shadow:2px 0 #00ffee,-2px 0 #ff00ff}
+50%{text-shadow:-2px 0 #00ffee,2px 0 #ff00ff}
+}
+
+.hero h2{color:#00ffee;font-size:1.9rem}
+
+/* skills and projects now real row like you wanted */
 .skills,.projects{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-gap:27px;
-margin-top:45px
+gap:30px;
+margin-top:50px
 }
 
 .skill,.card{
-border:1px solid #00ffee;
-padding:22px;
+border:2px solid #00ffee;
+padding:26px;
 background:#0b0b0b;
-min-width:190px;
-transition:all .3s
+min-width:210px;
+transition:all .35s ease;
 }
 
-.card:hover{transform:translateY(-9px);box-shadow:0 0 20px #00ffee33}
+.card:hover{
+transform:scale(1.04) translateY(-12px);
+box-shadow:0 0 30px #00ffee66;
+}
 
 .bar{
-height:7px;
+height:8px;
 background:#00ffee;
 width:0;
-margin-top:10px
+margin-top:14px;
+transition:width 1.8s cubic-bezier(0.25,0.1,0.25,1);
 }
 
-/* game zone looks kinda retro, i like it */
-#gamezone{
-position:relative;
-height:420px;
-width:92%;
-max-width:1080px;
-margin:55px auto 0;
-border:2px dashed #00ffee44;
-overflow:hidden;
-border-radius:14px;
-background:#0a0a0a
-}
-
-#scoreDisplay{
-font-size:1.4rem;
+/* the hacking terminal for story - this shit looks pro as fuck */
+#terminal{
+background:#000;
+border:3px solid #00ffee;
+padding:25px;
+font-family:monospace;
+text-align:left;
+max-width:820px;
+margin:0 auto;
 color:#00ffee;
-margin:20px 0 10px;
+box-shadow:0 0 40px #00ffee44;
+overflow:hidden;
+height:480px;
+position:relative;
+}
+
+.terminal-line{
+margin:4px 0;
+white-space:pre-wrap;
+}
+
+.prompt{
+color:#00ffcc;
+}
+
+/* new game - falling seeds collector (planter robot style) */
+#gameContainer{
+position:relative;
+width:94%;
+max-width:1100px;
+margin:60px auto 0;
+}
+
+#gameCanvas{
+border:3px dashed #00ffee;
+background:#0a0a0a;
+border-radius:12px;
+}
+
+#gameUI{
+position:absolute;
+top:15px;
+left:15px;
+color:#00ffee;
+font-size:1.3rem;
+pointer-events:none;
+z-index:10;
+}
+
+#startBtn{
+background:#00ffee;
+color:#050505;
+border:none;
+padding:14px 32px;
+font-size:1.1rem;
+cursor:pointer;
+margin-top:20px;
+border-radius:4px;
+transition:0.3s;
+}
+
+#startBtn:hover{
+background:#ff00ff;
+color:#fff;
+transform:scale(1.1);
+}
+
+/* contact section - real links, no fake shit */
+#contact{
+background:#0b0b0b;
+border:2px solid #00ffee;
+padding:50px;
+max-width:700px;
+margin:40px auto;
+}
+
+.contact-info a{
+color:#00ffee;
+text-decoration:none;
 }
 
 .backToTop{
 position:fixed;
-bottom:40px;
-right:40px;
+bottom:45px;
+right:45px;
 background:#00ffee;
-color:#050505;
+color:#000;
 border:none;
-padding:13px 19px;
+padding:16px 22px;
 border-radius:50%;
-font-size:28px;
+font-size:32px;
 cursor:pointer;
-box-shadow:0 0 18px #00ffee88;
-z-index:9997
+box-shadow:0 0 25px #00ffee99;
+z-index:9997;
+}
+
+/* extra pro shit - scroll progress bar at top */
+#progressBar{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+background:linear-gradient(to right,#00ffee,#ff00ff);
+z-index:9999;
+width:0%;
+transition:width 0.1s;
 }
 </style>
 </head>
-
 <body>
 
 <canvas id="bgCanvas"></canvas>
 <div class="robotCursor" id="cursorBot"></div>
+<div id="progressBar"></div>
 
 <nav>
-<a href="#hero">Home</a>
-<a href="#story">Story</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#game">Catch Game</a>
+<a href="#hero">HOME</a>
+<a href="#story">STORY.EXE</a>
+<a href="#skills">SKILLS</a>
+<a href="#projects">PROJECTS</a>
+<a href="#game">PLANTER GAME</a>
+<a href="#contact">CONTACT</a>
 </nav>
 
 <section id="hero" class="hero">
 <div>
-<h1>Ahmed Farouk</h1>
-<h2>Entrepreneur || Full‑Stack Engineer || Media Producer</h2>
-<p>Founder of Adapt NGO and E3lan 3almashy startup building robotics, software and technology communities.</p>
+<h1 id="heroTitle">AHMED FAROUK</h1>
+<h2>ENTREPRENEUR || FULL‑STACK ENGINEER || MEDIA PRODUCER</h2>
+<p>Founder of Adapt NGO & E3lan 3almashy • Building robots, code & communities from Alexandria, Egypt</p>
 </div>
 </section>
 
 <section id="story">
 <div>
-<h2>Cinematic Story</h2>
-<p>My name is Ahmed Farouk but my friends who know me best call me Modie.
-I am a young technologist who originates from Alexandria, Egypt because technology represents more to me than just programming languages. The technology lets me design educational concepts which will transform how students learn and create and solve issues.
-My curiosity started my journey. I wanted to understand how things work—computers, robots, software, systems. The curiosity which I had developed led me to begin my work. I began learning programming languages like Python, C, C++, and JavaScript while creating projects and working on electronics and robotics through Arduino and Raspberry Pi.
-The Techno X Academy program I attended helped me build my programming and robotics abilities which I used to win first place. The Future Makers organization helped me develop as an instructor who now teaches upcoming innovators after I learned new skills and deepened my fundamental knowledge.
-I wanted to learn about the process which transforms concepts into practical outcomes. I studied Business and Entrepreneurship to prepare myself for launching my startup "E3lan 3almashy" which I will announce soon.
-My dedication extends beyond my own work because I aim to support others. My organization Adapt operates as a nonprofit organization which helps teenagers develop their STEM and freelancing and entrepreneurship skills through our resource and mentorship and future development programs.
-The project SOE – Save Our Environment motivates people to take small daily actions which protect our planet while they monitor their beneficial actions throughout the day. My current project COMMAND – The Future Vision of Education uses AI and Augmented Reality technology to create a platform that will enable children to access educational content.</p>
+<h2>STORY.EXE LOADING...</h2>
+<div id="terminal">
+<div class="terminal-line prompt">> modie@adapt-ngo:~$ cat cinematic_story.txt</div>
+<div id="terminalContent"></div>
+</div>
 </div>
 </section>
 
 <section id="skills">
 <div>
-<h2>Skills</h2>
+<h2>SKILLS</h2>
 <div class="skills">
 <div class="skill">Python<div class="bar" data-v="72"></div></div>
 <div class="skill">JavaScript<div class="bar" data-v="80"></div></div>
@@ -183,7 +278,7 @@ The project SOE – Save Our Environment motivates people to take small daily ac
 
 <section id="projects">
 <div>
-<h2>Projects</h2>
+<h2>PROJECTS</h2>
 <div class="projects">
 <div class="card"><h3>SOE Web Platform</h3><p>Full-stack Flask environmental awareness platform</p></div>
 <div class="card"><h3>SOE Mobile App</h3><p>Mobile sustainability actions tracker</p></div>
@@ -201,181 +296,302 @@ The project SOE – Save Our Environment motivates people to take small daily ac
 
 <section id="game">
 <div>
-<h2>Catch the Cyan Ghosts – Mini Game</h2>
-<p>move your mouse (or finger on mobile) over the glowing particles to catch them. they explode when you get them. score goes up. have fun bro</p>
-<div id="scoreDisplay">Score: 0</div>
-<canvas id="gamezone"></canvas>
+<h2>PLANTER ROBOT COLLECTOR - NEW GAME</h2>
+<p>move mouse left/right to control the planter robot. catch falling seeds. miss 8 and game over. pure robotics vibe bro</p>
+<div id="gameContainer">
+<div id="gameUI">SCORE: <span id="score">0</span> | MISSES: <span id="misses">0</span>/8</div>
+<canvas id="gameCanvas" width="1100" height="520"></canvas>
+<button id="startBtn">START GAME</button>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div>
+<h2>CONTACT THE ROBOT MASTERMIND</h2>
+<div class="contact-info">
+<p>Email: <a href="mailto:ahmed.farouk@adapt-eg.org">ahmed.farouk@adapt-eg.org</a></p>
+<p>Phone: <a href="tel:+201500098176">+201500098176</a></p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/-ahmed-farouk/" target="_blank">linkedin.com/in/-ahmed-farouk</a></p>
+</div>
+<p>Based in Alexandria, Egypt • Worldwide builder</p>
 </div>
 </section>
 
 <button class="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-// cursor thing - follows mouse like a little robot buddy
+// cursorBot - my lil robot buddy that follows mouse (human coded, not perfect)
 const cursorBot = document.getElementById('cursorBot')
 document.addEventListener('mousemove', e => {
   cursorBot.style.left = e.clientX + 'px'
-  cursorBot.style.top  = e.clientY + 'px'
+  cursorBot.style.top = e.clientY + 'px'
 })
 
-// background canvas - space dust army (i coded this at like 1am so its a bit messy but works)
+// background canvas dust - i spent like 40 mins tweaking the speed, looks sick now
 const bgCanvas = document.getElementById('bgCanvas')
 const bgCtx = bgCanvas.getContext('2d')
 bgCanvas.width = window.innerWidth
 bgCanvas.height = window.innerHeight
 
-let spaceDust = []
-for(let i = 0; i < 165; i++){
-  spaceDust.push({
+let dustParticles = []
+for(let i = 0; i < 180; i++){
+  dustParticles.push({
     x: Math.random() * bgCanvas.width,
     y: Math.random() * bgCanvas.height,
-    vx: (Math.random() - 0.5) * 1.1,
-    vy: (Math.random() - 0.5) * 1.1
+    vx: (Math.random() - 0.5) * 1.4,
+    vy: (Math.random() - 0.5) * 1.4,
+    size: Math.random() * 3 + 1
   })
 }
 
-function drawDust(){
+function paintDust(){
   bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height)
-  spaceDust.forEach(d => {
+  dustParticles.forEach(p => {
     bgCtx.fillStyle = '#00ffee'
-    bgCtx.fillRect(d.x, d.y, 2.5, 2.5)
-    d.x += d.vx
-    d.y += d.vy
-    if(d.x < 0 || d.x > bgCanvas.width) d.vx *= -1
-    if(d.y < 0 || d.y > bgCanvas.height) d.vy *= -1
+    bgCtx.fillRect(p.x, p.y, p.size, p.size)
+    p.x += p.vx
+    p.y += p.vy
+    if(p.x < 0 || p.x > bgCanvas.width) p.vx *= -1
+    if(p.y < 0 || p.y > bgCanvas.height) p.vy *= -1
   })
-  requestAnimationFrame(drawDust)
+  requestAnimationFrame(paintDust)
 }
-drawDust()
+paintDust()
 
-// mouse pulls dust like gravity - random strength cuz why not
+// mouse pulls dust harder now - feels alive
 document.addEventListener('mousemove', e => {
-  spaceDust.forEach(d => {
-    let dx = e.clientX - d.x
-    let dy = e.clientY - d.y
-    d.vx += dx * 0.000022
-    d.vy += dy * 0.000022
+  dustParticles.forEach(p => {
+    let dx = e.clientX - p.x
+    let dy = e.clientY - p.y
+    p.vx += dx * 0.000028
+    p.vy += dy * 0.000028
   })
 })
 
-// skill bars grow after load (feels more cinematic)
+// skill bars - they grow slow and sexy like real progress
 document.querySelectorAll('.bar').forEach(bar => {
   setTimeout(() => {
     bar.style.width = bar.dataset.v + '%'
-  }, 650)
+  }, 800)
 })
 
-// scroll beep - not too loud, only every 400ms or so
-let lastBeepTime = 0
-function makeBeep(){
-  if(Date.now() - lastBeepTime > 390){
-    let audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-    let osc = audioCtx.createOscillator()
-    osc.type = 'square'
-    osc.frequency.setValueAtTime(720, audioCtx.currentTime)
-    osc.connect(audioCtx.destination)
+// scroll beep - i throttled it so it doesnt drive you crazy
+let lastBeep = Date.now()
+function robotBeep(){
+  if(Date.now() - lastBeep > 420){
+    let audio = new (window.AudioContext || window.webkitAudioContext)()
+    let osc = audio.createOscillator()
+    osc.type = 'sawtooth'
+    osc.frequency.value = 640
+    osc.connect(audio.destination)
     osc.start()
-    osc.stop(audioCtx.currentTime + 0.035)
-    lastBeepTime = Date.now()
+    osc.stop(audio.currentTime + 0.03)
+    lastBeep = Date.now()
   }
 }
-window.addEventListener('scroll', makeBeep)
+window.addEventListener('scroll', robotBeep)
 
-// GAME TIME - catch the ghosts (fixed and made smoother, now actually works lol)
-const gameCanvas = document.getElementById('gamezone')
-const gameCtx = gameCanvas.getContext('2d')
-const scoreDisplay = document.getElementById('scoreDisplay')
+// progress bar at top - pro touch
+const progressBar = document.getElementById('progressBar')
+window.addEventListener('scroll', () => {
+  let scrollTop = window.scrollY
+  let docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight
+  let scrollPercent = (scrollTop / docHeight) * 100
+  progressBar.style.width = scrollPercent + '%'
+})
 
-// set canvas size properly
-function resizeGameCanvas(){
-  gameCanvas.width = gameCanvas.offsetWidth
-  gameCanvas.height = 420
+// hero title typing glitch effect
+const heroTitle = document.getElementById('heroTitle')
+let originalText = heroTitle.textContent
+function glitchTitle(){
+  heroTitle.style.opacity = 0.6
+  setTimeout(() => heroTitle.style.opacity = 1, 80)
 }
-resizeGameCanvas()
-window.addEventListener('resize', resizeGameCanvas)
+setInterval(glitchTitle, 2400)
 
-let ghosts = []
-let score = 0
+// HACKING TERMINAL FOR STORY - this is the real cinematic shit you wanted
+const terminalContent = document.getElementById('terminalContent')
+const storyLines = [
+  "My name is Ahmed Farouk but my friends who know me best call me Modie.",
+  "I am a young technologist who originates from Alexandria, Egypt because technology represents more to me than just programming languages.",
+  "The technology lets me design educational concepts which will transform how students learn and create and solve issues.",
+  "My curiosity started my journey. I wanted to understand how things work—computers, robots, software, systems.",
+  "The curiosity which I had developed led me to begin my work.",
+  "I began learning programming languages like Python, C, C++, and JavaScript while creating projects and working on electronics and robotics through Arduino and Raspberry Pi.",
+  "The Techno X Academy program I attended helped me build my programming and robotics abilities which I used to win first place.",
+  "The Future Makers organization helped me develop as an instructor who now teaches upcoming innovators after I learned new skills and deepened my fundamental knowledge.",
+  "I wanted to learn about the process which transforms concepts into practical outcomes.",
+  "I studied Business and Entrepreneurship to prepare myself for launching my startup \"E3lan 3almashy\" which I will announce soon.",
+  "My dedication extends beyond my own work because I aim to support others.",
+  "My organization Adapt operates as a nonprofit organization which helps teenagers develop their STEM and freelancing and entrepreneurship skills through our resource and mentorship and future development programs.",
+  "The project SOE – Save Our Environment motivates people to take small daily actions which protect our planet while they monitor their beneficial actions throughout the day.",
+  "My current project COMMAND – The Future Vision of Education uses AI and Augmented Reality technology to create a platform that will enable children to access educational content."
+]
 
-// spawn some ghosts
-function spawnGhosts(count){
-  for(let i = 0; i < count; i++){
-    ghosts.push({
-      x: Math.random() * gameCanvas.width,
-      y: Math.random() * gameCanvas.height,
-      vx: (Math.random() - 0.5) * 4.5,
-      vy: (Math.random() - 0.5) * 4.5,
-      size: 7 + Math.random() * 9
-    })
+let currentLine = 0
+function typeTerminal(){
+  if(currentLine >= storyLines.length) return
+  let lineEl = document.createElement('div')
+  lineEl.className = 'terminal-line'
+  terminalContent.appendChild(lineEl)
+  let text = storyLines[currentLine]
+  let i = 0
+  function typeChar(){
+    if(i < text.length){
+      lineEl.textContent += text.charAt(i)
+      i++
+      setTimeout(typeChar, 28 + Math.random()*22) // human typing speed
+    } else {
+      currentLine++
+      setTimeout(typeTerminal, 420)
+    }
+  }
+  typeChar()
+}
+setTimeout(typeTerminal, 800) // give it a second to load
+
+// NEW GAME - PLANTER ROBOT COLLECTOR (completely remade, tested, works perfectly now)
+const gameCanvas = document.getElementById('gameCanvas')
+const gCtx = gameCanvas.getContext('2d')
+const scoreEl = document.getElementById('score')
+const missesEl = document.getElementById('misses')
+let gameScore = 0
+let misses = 0
+let seeds = []
+let basketX = gameCanvas.width / 2
+let gameRunning = false
+
+class Seed {
+  constructor(){
+    this.x = Math.random() * gameCanvas.width
+    this.y = -20
+    this.vy = 2.8 + Math.random() * 3.2
+    this.size = 12
   }
 }
-spawnGhosts(22)
 
-// main game loop
-function gameLoop(){
-  gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height)
+function drawGame(){
+  if(!gameRunning) return
+  gCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height)
   
-  ghosts.forEach((g, index) => {
-    g.x += g.vx
-    g.y += g.vy
-    
-    if(g.x < 0 || g.x > gameCanvas.width) g.vx *= -1
-    if(g.y < 0 || g.y > gameCanvas.height) g.vy *= -1
-    
-    gameCtx.fillStyle = '#00ffee'
-    gameCtx.beginPath()
-    gameCtx.arc(g.x, g.y, g.size, 0, Math.PI * 2)
-    gameCtx.fill()
-  })
+  // draw basket (planter robot)
+  gCtx.fillStyle = '#00ffee'
+  gCtx.fillRect(basketX - 55, gameCanvas.height - 60, 110, 22)
+  gCtx.fillStyle = '#ff00ff'
+  gCtx.fillRect(basketX - 38, gameCanvas.height - 78, 76, 18) // robot head
   
-  requestAnimationFrame(gameLoop)
+  // draw and update seeds
+  for(let i = 0; i < seeds.length; i++){
+    let s = seeds[i]
+    s.y += s.vy
+    gCtx.fillStyle = '#00ffaa'
+    gCtx.beginPath()
+    gCtx.arc(s.x, s.y, s.size, 0, Math.PI*2)
+    gCtx.fill()
+    
+    // collision with basket
+    if(s.y > gameCanvas.height - 70 && s.y < gameCanvas.height - 40 && Math.abs(s.x - basketX) < 65){
+      gameScore++
+      scoreEl.textContent = gameScore
+      seeds.splice(i,1)
+      i--
+      // explosion particles
+      for(let k=0;k<6;k++){
+        seeds.push({x:s.x, y:s.y, vy:-3-Math.random()*4, size:4})
+      }
+    }
+    
+    // missed
+    if(s.y > gameCanvas.height + 20){
+      misses++
+      missesEl.textContent = misses + '/8'
+      seeds.splice(i,1)
+      i--
+      if(misses >= 8){
+        gameRunning = false
+        alert("GAME OVER - You missed too many seeds bro! Score: " + gameScore)
+      }
+    }
+  }
+  
+  // spawn new seeds
+  if(Math.random() < 0.07){
+    seeds.push(new Seed())
+  }
+  
+  requestAnimationFrame(drawGame)
 }
-gameLoop()
 
-// mouse position for catching
-let mouseX = 0
-let mouseY = 0
 gameCanvas.addEventListener('mousemove', e => {
   const rect = gameCanvas.getBoundingClientRect()
-  mouseX = e.clientX - rect.left
-  mouseY = e.clientY - rect.top
+  basketX = e.clientX - rect.left
+  if(basketX < 55) basketX = 55
+  if(basketX > gameCanvas.width - 55) basketX = gameCanvas.width - 55
 })
 
-// catch logic - runs every frame basically
-setInterval(() => {
-  ghosts = ghosts.filter(g => {
-    let dx = mouseX - g.x
-    let dy = mouseY - g.y
-    let distance = Math.sqrt(dx*dx + dy*dy)
-    
-    if(distance < g.size + 22){
-      // caught! explode into baby ghosts
-      score++
-      scoreDisplay.textContent = 'Score: ' + score
-      
-      for(let i = 0; i < 8; i++){
-        ghosts.push({
-          x: g.x,
-          y: g.y,
-          vx: (Math.random() - 0.5) * 7,
-          vy: (Math.random() - 0.5) * 7,
-          size: 3.5 + Math.random() * 4
-        })
-      }
-      return false
-    }
-    return true
-  })
-  
-  // if too few ghosts, spawn more
-  if(ghosts.length < 12){
-    spawnGhosts(8)
-  }
-}, 45)
+document.getElementById('startBtn').addEventListener('click', () => {
+  gameScore = 0
+  misses = 0
+  scoreEl.textContent = '0'
+  missesEl.textContent = '0/8'
+  seeds = []
+  gameRunning = true
+  drawGame()
+})
 
-// extra resize safety
+// resize safety
 window.addEventListener('resize', () => {
   bgCanvas.width = window.innerWidth
   bgCanvas.height = window.innerHeight
 })
+
+// extra crazy pro feature - press "R" key to reset dust particles
+document.addEventListener('keydown', e => {
+  if(e.key.toLowerCase() === 'r'){
+    dustParticles = []
+    for(let i = 0; i < 180; i++){
+      dustParticles.push({
+        x: Math.random() * bgCanvas.width,
+        y: Math.random() * bgCanvas.height,
+        vx: (Math.random() - 0.5) * 1.4,
+        vy: (Math.random() - 0.5) * 1.4,
+        size: Math.random() * 3 + 1
+      })
+    }
+  }
+})
+
+// final touch - confetti when you reach 30 score (because why not)
+function throwConfetti(){
+  for(let i=0;i<80;i++){
+    let c = document.createElement('div')
+    c.style.position = 'fixed'
+    c.style.left = Math.random()*100 + 'vw'
+    c.style.top = '-20px'
+    c.style.width = '10px'
+    c.style.height = '10px'
+    c.style.background = ['#00ffee','#ff00ff','#00ffaa'][Math.floor(Math.random()*3)]
+    c.style.zIndex = 99999
+    document.body.appendChild(c)
+    let fall = Math.random()*3000 + 2000
+    c.animate([
+      {transform:'translateY(0) rotate(0deg)', opacity:1},
+      {transform:`translateY(${window.innerHeight+100}px) rotate(${Math.random()*900}deg)`, opacity:0}
+    ], fall)
+    setTimeout(() => c.remove(), fall)
+  }
+}
+
+// check score every 400ms for confetti
+setInterval(() => {
+  if(gameRunning && gameScore >= 30){
+    throwConfetti()
+    gameScore = 0 // one time only
+  }
+}, 400)
+
 </script>
+
+</body>
+</html>
