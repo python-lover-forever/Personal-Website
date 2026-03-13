@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Farouk | you can call me King</title>
+<title>Ahmed Farouk</title>
 
 <style>
 body{
@@ -12,6 +12,7 @@ color:#e6ffff;
 font-family:monospace;
 margin:0;
 overflow-x:hidden;
+  
 scroll-behavior:smooth;
 cursor:none
 }
@@ -94,12 +95,14 @@ border:2px solid #00ffee;
 padding:26px;
 background:#0b0b0b;
 min-width:210px;
+  
 transition:all .35s ease
 }
 
 .card:hover{
 transform:scale(1.04) translateY(-12px);
 box-shadow:0 0 30px #00ffee66
+  
 }
 
 .bar{
@@ -181,27 +184,6 @@ color:#fff;
 transform:scale(1.1)
 }
 
-#manual{
-background:#0b0b0b;
-border:2px solid #00ffee;
-padding:50px;
-max-width:700px;
-margin:40px auto
-}
-
-#manual ul{
-list-style:none;
-text-align:left;
-max-width:600px;
-margin:auto;
-padding:0
-}
-
-#manual li{
-margin:12px 0;
-font-size:1.15rem
-}
-
 #contact{
 background:#0b0b0b;
 border:2px solid #00ffee;
@@ -240,6 +222,13 @@ z-index:9999;
 width:0%;
 transition:width 0.1s
 }
+
+#gameNote{
+font-size:0.95rem;
+color:#00ffee88;
+margin-top:15px;
+text-align:center
+}
 </style>
 </head>
 
@@ -255,7 +244,6 @@ transition:width 0.1s
 <a href="#skills">SKILLS</a>
 <a href="#projects">PROJECTS</a>
 <a href="#game">PLANTER GAME</a>
-<a href="#manual">MANUAL</a>
 <a href="#contact">CONTACT</a>
 </nav>
 
@@ -325,20 +313,8 @@ transition:width 0.1s
 <canvas id="gameCanvas" width="1100" height="520"></canvas>
 <button id="startBtn">START GAME</button>
 <button id="stopBtn">STOP GAME</button>
+<div id="gameNote">Hold R to see what will happen</div>
 </div>
-</div>
-</section>
-
-<section id="manual">
-<div>
-<h2>CRAZY FEATURES MANUAL</h2>
-<ul>
-<li>Hold R to see what will happen</li>
-<li>Use LEFT arrow to see what will happen</li>
-<li>Use RIGHT arrow to see what will happen</li>
-<li>Click START GAME to see what will happen</li>
-<li>Click STOP GAME to see what will happen</li>
-</ul>
 </div>
 </section>
 
@@ -393,6 +369,8 @@ function paintDust(){
 }
 paintDust()
 
+
+  
 document.addEventListener('mousemove', e => {
   dustParticles.forEach(p => {
     let dx = e.clientX - p.x
@@ -408,15 +386,20 @@ document.querySelectorAll('.bar').forEach(bar => {
   }, 800)
 })
 
+
+  
 let lastBeep = Date.now()
+  
 function robotBeep(){
   if(Date.now() - lastBeep > 420){
     let audio = new (window.AudioContext || window.webkitAudioContext)()
     let osc = audio.createOscillator()
     osc.type = 'sawtooth'
     osc.frequency.value = 640
+    
     osc.connect(audio.destination)
     osc.start()
+    
     osc.stop(audio.currentTime + 0.03)
     lastBeep = Date.now()
   }
@@ -427,6 +410,7 @@ const progressBar = document.getElementById('progressBar')
 window.addEventListener('scroll', () => {
   let scrollTop = window.scrollY
   let docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight
+  
   let scrollPercent = (scrollTop / docHeight) * 100
   progressBar.style.width = scrollPercent + '%'
 })
