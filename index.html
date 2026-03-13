@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Farouk | Modie - The Robot Kid from Alexandria</title>
+<title>Ahmed Farouk | you can call me King</title>
 
 <style>
-/* ok bro this is the real deal, i cleaned everything, no more bullshit placeholders */
-/* background is pure cyber dust like old school matrix but cyan cuz we egyptian tech */
 body{
 background:#050505;
 color:#e6ffff;
@@ -15,7 +13,7 @@ font-family:monospace;
 margin:0;
 overflow-x:hidden;
 scroll-behavior:smooth;
-cursor:none;
+cursor:none
 }
 
 canvas{
@@ -34,7 +32,7 @@ border-radius:6px;
 pointer-events:none;
 z-index:9999;
 mix-blend-mode:difference;
-box-shadow:0 0 12px #00ffee;
+box-shadow:0 0 12px #00ffee
 }
 
 nav{
@@ -47,18 +45,18 @@ gap:50px;
 background:rgba(0,0,0,0.85);
 padding:19px;
 z-index:9998;
-backdrop-filter:blur(8px);
+backdrop-filter:blur(8px)
 }
 
 nav a{
 color:#00ffee;
 text-decoration:none;
 font-size:1.2rem;
-transition:0.2s;
+transition:0.2s
 }
 
 nav a:hover{
-text-shadow:0 0 10px #00ffee;
+text-shadow:0 0 10px #00ffee
 }
 
 section{
@@ -67,13 +65,13 @@ display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:90px 16%;
+padding:90px 16%
 }
 
 .hero h1{
 font-size:72px;
 margin:0;
-animation:glitch 2s infinite;
+animation:glitch 2s infinite
 }
 
 @keyframes glitch{
@@ -83,7 +81,6 @@ animation:glitch 2s infinite;
 
 .hero h2{color:#00ffee;font-size:1.9rem}
 
-/* skills and projects now real row like you wanted */
 .skills,.projects{
 display:flex;
 flex-wrap:wrap;
@@ -97,12 +94,12 @@ border:2px solid #00ffee;
 padding:26px;
 background:#0b0b0b;
 min-width:210px;
-transition:all .35s ease;
+transition:all .35s ease
 }
 
 .card:hover{
 transform:scale(1.04) translateY(-12px);
-box-shadow:0 0 30px #00ffee66;
+box-shadow:0 0 30px #00ffee66
 }
 
 .bar{
@@ -110,10 +107,9 @@ height:8px;
 background:#00ffee;
 width:0;
 margin-top:14px;
-transition:width 1.8s cubic-bezier(0.25,0.1,0.25,1);
+transition:width 1.8s cubic-bezier(0.25,0.1,0.25,1)
 }
 
-/* the hacking terminal for story - this shit looks pro as fuck */
 #terminal{
 background:#000;
 border:3px solid #00ffee;
@@ -126,30 +122,30 @@ color:#00ffee;
 box-shadow:0 0 40px #00ffee44;
 overflow:hidden;
 height:480px;
-position:relative;
+position:relative
 }
 
 .terminal-line{
 margin:4px 0;
-white-space:pre-wrap;
+white-space:pre-wrap
 }
 
 .prompt{
-color:#00ffcc;
+color:#00ffcc
 }
 
-/* new game - falling seeds collector (planter robot style) */
 #gameContainer{
 position:relative;
 width:94%;
 max-width:1100px;
-margin:60px auto 0;
+margin:60px auto 0
 }
 
 #gameCanvas{
 border:3px dashed #00ffee;
 background:#0a0a0a;
 border-radius:12px;
+display:none
 }
 
 #gameUI{
@@ -159,39 +155,64 @@ left:15px;
 color:#00ffee;
 font-size:1.3rem;
 pointer-events:none;
-z-index:10;
+z-index:10
 }
 
-#startBtn{
+#startBtn,#stopBtn{
 background:#00ffee;
 color:#050505;
 border:none;
 padding:14px 32px;
 font-size:1.1rem;
 cursor:pointer;
-margin-top:20px;
+margin:20px 10px 0;
 border-radius:4px;
-transition:0.3s;
+transition:0.3s
 }
 
-#startBtn:hover{
+#stopBtn{
+background:#ff00aa;
+display:none
+}
+
+#startBtn:hover,#stopBtn:hover{
 background:#ff00ff;
 color:#fff;
-transform:scale(1.1);
+transform:scale(1.1)
 }
 
-/* contact section - real links, no fake shit */
+#manual{
+background:#0b0b0b;
+border:2px solid #00ffee;
+padding:50px;
+max-width:700px;
+margin:40px auto
+}
+
+#manual ul{
+list-style:none;
+text-align:left;
+max-width:600px;
+margin:auto;
+padding:0
+}
+
+#manual li{
+margin:12px 0;
+font-size:1.15rem
+}
+
 #contact{
 background:#0b0b0b;
 border:2px solid #00ffee;
 padding:50px;
 max-width:700px;
-margin:40px auto;
+margin:40px auto
 }
 
 .contact-info a{
 color:#00ffee;
-text-decoration:none;
+text-decoration:none
 }
 
 .backToTop{
@@ -206,10 +227,9 @@ border-radius:50%;
 font-size:32px;
 cursor:pointer;
 box-shadow:0 0 25px #00ffee99;
-z-index:9997;
+z-index:9997
 }
 
-/* extra pro shit - scroll progress bar at top */
 #progressBar{
 position:fixed;
 top:0;
@@ -218,10 +238,11 @@ height:4px;
 background:linear-gradient(to right,#00ffee,#ff00ff);
 z-index:9999;
 width:0%;
-transition:width 0.1s;
+transition:width 0.1s
 }
 </style>
 </head>
+
 <body>
 
 <canvas id="bgCanvas"></canvas>
@@ -234,6 +255,7 @@ transition:width 0.1s;
 <a href="#skills">SKILLS</a>
 <a href="#projects">PROJECTS</a>
 <a href="#game">PLANTER GAME</a>
+<a href="#manual">MANUAL</a>
 <a href="#contact">CONTACT</a>
 </nav>
 
@@ -296,19 +318,33 @@ transition:width 0.1s;
 
 <section id="game">
 <div>
-<h2>PLANTER ROBOT COLLECTOR - NEW GAME</h2>
-<p>move mouse left/right to control the planter robot. catch falling seeds. miss 8 and game over. pure robotics vibe bro</p>
+<h2>PLANTER ROBOT COLLECTOR</h2>
+<p>move the robot with arrows and catch falling seeds</p>
 <div id="gameContainer">
 <div id="gameUI">SCORE: <span id="score">0</span> | MISSES: <span id="misses">0</span>/8</div>
 <canvas id="gameCanvas" width="1100" height="520"></canvas>
 <button id="startBtn">START GAME</button>
+<button id="stopBtn">STOP GAME</button>
 </div>
+</div>
+</section>
+
+<section id="manual">
+<div>
+<h2>CRAZY FEATURES MANUAL</h2>
+<ul>
+<li>Hold R to see what will happen</li>
+<li>Use LEFT arrow to see what will happen</li>
+<li>Use RIGHT arrow to see what will happen</li>
+<li>Click START GAME to see what will happen</li>
+<li>Click STOP GAME to see what will happen</li>
+</ul>
 </div>
 </section>
 
 <section id="contact">
 <div>
-<h2>CONTACT THE ROBOT MASTERMIND</h2>
+<h2>CONTACT</h2>
 <div class="contact-info">
 <p>Email: <a href="mailto:ahmed.farouk@adapt-eg.org">ahmed.farouk@adapt-eg.org</a></p>
 <p>Phone: <a href="tel:+201500098176">+201500098176</a></p>
@@ -321,14 +357,12 @@ transition:width 0.1s;
 <button class="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-// cursorBot - my lil robot buddy that follows mouse (human coded, not perfect)
 const cursorBot = document.getElementById('cursorBot')
 document.addEventListener('mousemove', e => {
   cursorBot.style.left = e.clientX + 'px'
   cursorBot.style.top = e.clientY + 'px'
 })
 
-// background canvas dust - i spent like 40 mins tweaking the speed, looks sick now
 const bgCanvas = document.getElementById('bgCanvas')
 const bgCtx = bgCanvas.getContext('2d')
 bgCanvas.width = window.innerWidth
@@ -359,7 +393,6 @@ function paintDust(){
 }
 paintDust()
 
-// mouse pulls dust harder now - feels alive
 document.addEventListener('mousemove', e => {
   dustParticles.forEach(p => {
     let dx = e.clientX - p.x
@@ -369,14 +402,12 @@ document.addEventListener('mousemove', e => {
   })
 })
 
-// skill bars - they grow slow and sexy like real progress
 document.querySelectorAll('.bar').forEach(bar => {
   setTimeout(() => {
     bar.style.width = bar.dataset.v + '%'
   }, 800)
 })
 
-// scroll beep - i throttled it so it doesnt drive you crazy
 let lastBeep = Date.now()
 function robotBeep(){
   if(Date.now() - lastBeep > 420){
@@ -392,7 +423,6 @@ function robotBeep(){
 }
 window.addEventListener('scroll', robotBeep)
 
-// progress bar at top - pro touch
 const progressBar = document.getElementById('progressBar')
 window.addEventListener('scroll', () => {
   let scrollTop = window.scrollY
@@ -401,16 +431,13 @@ window.addEventListener('scroll', () => {
   progressBar.style.width = scrollPercent + '%'
 })
 
-// hero title typing glitch effect
 const heroTitle = document.getElementById('heroTitle')
-let originalText = heroTitle.textContent
 function glitchTitle(){
   heroTitle.style.opacity = 0.6
   setTimeout(() => heroTitle.style.opacity = 1, 80)
 }
 setInterval(glitchTitle, 2400)
 
-// HACKING TERMINAL FOR STORY - this is the real cinematic shit you wanted
 const terminalContent = document.getElementById('terminalContent')
 const storyLines = [
   "My name is Ahmed Farouk but my friends who know me best call me Modie.",
@@ -441,7 +468,7 @@ function typeTerminal(){
     if(i < text.length){
       lineEl.textContent += text.charAt(i)
       i++
-      setTimeout(typeChar, 28 + Math.random()*22) // human typing speed
+      setTimeout(typeChar, 28 + Math.random()*22)
     } else {
       currentLine++
       setTimeout(typeTerminal, 420)
@@ -449,13 +476,14 @@ function typeTerminal(){
   }
   typeChar()
 }
-setTimeout(typeTerminal, 800) // give it a second to load
+setTimeout(typeTerminal, 800)
 
-// NEW GAME - PLANTER ROBOT COLLECTOR (completely remade, tested, works perfectly now)
 const gameCanvas = document.getElementById('gameCanvas')
 const gCtx = gameCanvas.getContext('2d')
 const scoreEl = document.getElementById('score')
 const missesEl = document.getElementById('misses')
+const startBtn = document.getElementById('startBtn')
+const stopBtn = document.getElementById('stopBtn')
 let gameScore = 0
 let misses = 0
 let seeds = []
@@ -475,13 +503,11 @@ function drawGame(){
   if(!gameRunning) return
   gCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height)
   
-  // draw basket (planter robot)
   gCtx.fillStyle = '#00ffee'
   gCtx.fillRect(basketX - 55, gameCanvas.height - 60, 110, 22)
   gCtx.fillStyle = '#ff00ff'
-  gCtx.fillRect(basketX - 38, gameCanvas.height - 78, 76, 18) // robot head
+  gCtx.fillRect(basketX - 38, gameCanvas.height - 78, 76, 18)
   
-  // draw and update seeds
   for(let i = 0; i < seeds.length; i++){
     let s = seeds[i]
     s.y += s.vy
@@ -490,19 +516,16 @@ function drawGame(){
     gCtx.arc(s.x, s.y, s.size, 0, Math.PI*2)
     gCtx.fill()
     
-    // collision with basket
     if(s.y > gameCanvas.height - 70 && s.y < gameCanvas.height - 40 && Math.abs(s.x - basketX) < 65){
       gameScore++
       scoreEl.textContent = gameScore
       seeds.splice(i,1)
       i--
-      // explosion particles
       for(let k=0;k<6;k++){
         seeds.push({x:s.x, y:s.y, vy:-3-Math.random()*4, size:4})
       }
     }
     
-    // missed
     if(s.y > gameCanvas.height + 20){
       misses++
       missesEl.textContent = misses + '/8'
@@ -510,12 +533,14 @@ function drawGame(){
       i--
       if(misses >= 8){
         gameRunning = false
-        alert("GAME OVER - You missed too many seeds bro! Score: " + gameScore)
+        startBtn.style.display = 'inline-block'
+        stopBtn.style.display = 'none'
+        gameCanvas.style.display = 'none'
+        alert("GAME OVER - Score: " + gameScore)
       }
     }
   }
   
-  // spawn new seeds
   if(Math.random() < 0.07){
     seeds.push(new Seed())
   }
@@ -523,30 +548,40 @@ function drawGame(){
   requestAnimationFrame(drawGame)
 }
 
-gameCanvas.addEventListener('mousemove', e => {
-  const rect = gameCanvas.getBoundingClientRect()
-  basketX = e.clientX - rect.left
+document.addEventListener('keydown', e => {
+  if(!gameRunning) return
+  if(e.key === 'ArrowLeft') basketX -= 28
+  if(e.key === 'ArrowRight') basketX += 28
   if(basketX < 55) basketX = 55
   if(basketX > gameCanvas.width - 55) basketX = gameCanvas.width - 55
 })
 
-document.getElementById('startBtn').addEventListener('click', () => {
+startBtn.addEventListener('click', () => {
   gameScore = 0
   misses = 0
   scoreEl.textContent = '0'
   missesEl.textContent = '0/8'
   seeds = []
+  basketX = gameCanvas.width / 2
   gameRunning = true
+  gameCanvas.style.display = 'block'
+  startBtn.style.display = 'none'
+  stopBtn.style.display = 'inline-block'
   drawGame()
 })
 
-// resize safety
+stopBtn.addEventListener('click', () => {
+  gameRunning = false
+  gameCanvas.style.display = 'none'
+  stopBtn.style.display = 'none'
+  startBtn.style.display = 'inline-block'
+})
+
 window.addEventListener('resize', () => {
   bgCanvas.width = window.innerWidth
   bgCanvas.height = window.innerHeight
 })
 
-// extra crazy pro feature - press "R" key to reset dust particles
 document.addEventListener('keydown', e => {
   if(e.key.toLowerCase() === 'r'){
     dustParticles = []
@@ -562,35 +597,28 @@ document.addEventListener('keydown', e => {
   }
 })
 
-// final touch - confetti when you reach 30 score (because why not)
-function throwConfetti(){
-  for(let i=0;i<80;i++){
-    let c = document.createElement('div')
-    c.style.position = 'fixed'
-    c.style.left = Math.random()*100 + 'vw'
-    c.style.top = '-20px'
-    c.style.width = '10px'
-    c.style.height = '10px'
-    c.style.background = ['#00ffee','#ff00ff','#00ffaa'][Math.floor(Math.random()*3)]
-    c.style.zIndex = 99999
-    document.body.appendChild(c)
-    let fall = Math.random()*3000 + 2000
-    c.animate([
-      {transform:'translateY(0) rotate(0deg)', opacity:1},
-      {transform:`translateY(${window.innerHeight+100}px) rotate(${Math.random()*900}deg)`, opacity:0}
-    ], fall)
-    setTimeout(() => c.remove(), fall)
-  }
-}
-
-// check score every 400ms for confetti
 setInterval(() => {
   if(gameRunning && gameScore >= 30){
-    throwConfetti()
-    gameScore = 0 // one time only
+    for(let i=0;i<80;i++){
+      let c = document.createElement('div')
+      c.style.position = 'fixed'
+      c.style.left = Math.random()*100 + 'vw'
+      c.style.top = '-20px'
+      c.style.width = '10px'
+      c.style.height = '10px'
+      c.style.background = ['#00ffee','#ff00ff','#00ffaa'][Math.floor(Math.random()*3)]
+      c.style.zIndex = 99999
+      document.body.appendChild(c)
+      let fall = Math.random()*3000 + 2000
+      c.animate([
+        {transform:'translateY(0) rotate(0deg)', opacity:1},
+        {transform:`translateY(${window.innerHeight+100}px) rotate(${Math.random()*900}deg)`, opacity:0}
+      ], fall)
+      setTimeout(() => c.remove(), fall)
+    }
+    gameScore = 0
   }
 }, 400)
-
 </script>
 
 </body>
