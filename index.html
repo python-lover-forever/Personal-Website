@@ -2,16 +2,20 @@
 <html lang="en">
 
 
+
 <head>
 <meta charset="UTF-8">
+
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+
 <title>Ahmed Farouk | Modie</title>
 
 <style>
+
 
 
 body{
@@ -34,6 +38,7 @@ z-index:-1
 }
 
 
+
 .robotCursor{
 position:fixed;
 width:24px;
@@ -45,6 +50,7 @@ z-index:9999;
 mix-blend-mode:difference;
 box-shadow:0 0 12px #00ffee
 }
+
 
 
 nav{
@@ -70,9 +76,11 @@ transition:0.2s
 }
 
 
+
 nav a:hover{
 text-shadow:0 0 10px #00ffee
 }
+
 
 
 section{
@@ -85,6 +93,7 @@ padding:90px 16%
 }
 
 
+
 .hero h1{
 font-size:72px;
 margin:0;
@@ -92,10 +101,12 @@ animation:glitch 2s infinite
 }
 
 
+
 @keyframes glitch{
 0%{text-shadow:2px 0 #00ffee,-2px 0 #ff00ff}
 50%{text-shadow:-2px 0 #00ffee,2px 0 #ff00ff}
 }
+
 
 
 .hero h2{color:#00ffee;font-size:1.9rem}
@@ -361,11 +372,11 @@ text-align:center
 <h2>PLANTER ROBOT COLLECTOR</h2>
 <p>move the robot with arrows and catch falling seeds</p>
 <div id="gameContainer">
-<div id="gameUI">SCORE: <span id="score">0</span> | MISSES: <span id="misses">0</span>/8</div>
-<canvas id="gameCanvas" width="1100" height="520"></canvas>
 <button id="startBtn">START GAME</button>
 <button id="stopBtn">STOP GAME</button>
 <div id="gameNote">Hold R to see what will happen</div>
+<canvas id="gameCanvas" width="1100" height="520"></canvas>
+<div id="gameUI">SCORE: <span id="score">0</span> | MISSES: <span id="misses">0</span>/8</div>
 </div>
 </div>
 </section>
@@ -387,11 +398,19 @@ text-align:center
 <script>
 const cursorBot = document.getElementById('cursorBot')
 
+
+
 document.addEventListener('mousemove', e => {
+
+
 
   cursorBot.style.left = e.clientX + 'px'
 
+
+
   cursorBot.style.top = e.clientY + 'px'
+
+
 
 })
 
@@ -411,17 +430,31 @@ let dustParticles = []
 
 for(let i = 0; i < 180; i++){
 
+
+
   dustParticles.push({
+
+
 
     x: Math.random() * bgCanvas.width,
 
+
+
     y: Math.random() * bgCanvas.height,
+
+
 
     vx: (Math.random() - 0.5) * 1.4,
 
+
+
     vy: (Math.random() - 0.5) * 1.4,
 
+
+
     size: Math.random() * 3 + 1
+
+
 
   })
 
@@ -431,23 +464,43 @@ for(let i = 0; i < 180; i++){
 
 function paintDust(){
 
+
+
   bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height)
+
+
 
   dustParticles.forEach(p => {
 
+
+
     bgCtx.fillStyle = '#00ffee'
+
+
 
     bgCtx.fillRect(p.x, p.y, p.size, p.size)
 
+
+
     p.x += p.vx
+
+
 
     p.y += p.vy
 
+
+
     if(p.x < 0 || p.x > bgCanvas.width) p.vx *= -1
+
+
 
     if(p.y < 0 || p.y > bgCanvas.height) p.vy *= -1
 
+
+
   })
+
+
 
   requestAnimationFrame(paintDust)
 
@@ -459,15 +512,27 @@ paintDust()
 
 document.addEventListener('mousemove', e => {
 
+
+
   dustParticles.forEach(p => {
+
+
 
     let dx = e.clientX - p.x
 
+
+
     let dy = e.clientY - p.y
+
+
 
     p.vx += dx * 0.000028
 
+
+
     p.vy += dy * 0.000028
+
+
 
   })
 
@@ -477,9 +542,15 @@ document.addEventListener('mousemove', e => {
 
 document.querySelectorAll('.bar').forEach(bar => {
 
+
+
   setTimeout(() => {
 
+
+
     bar.style.width = bar.dataset.v + '%'
+
+
 
   }, 800)
 
@@ -491,23 +562,43 @@ let lastBeep = Date.now()
 
 function robotBeep(){
 
+
+
   if(Date.now() - lastBeep > 420){
+
+
 
     let audio = new (window.AudioContext || window.webkitAudioContext)()
 
+
+
     let osc = audio.createOscillator()
+
+
 
     osc.type = 'sawtooth'
 
+
+
     osc.frequency.value = 640
+
+
 
     osc.connect(audio.destination)
 
+
+
     osc.start()
+
+
 
     osc.stop(audio.currentTime + 0.03)
 
+
+
     lastBeep = Date.now()
+
+
 
   }
 
@@ -521,11 +612,19 @@ const progressBar = document.getElementById('progressBar')
 
 window.addEventListener('scroll', () => {
 
+
+
   let scrollTop = window.scrollY
+
+
 
   let docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight
 
+
+
   let scrollPercent = (scrollTop / docHeight) * 100
+
+
 
   progressBar.style.width = scrollPercent + '%'
 
@@ -537,7 +636,11 @@ const heroTitle = document.getElementById('heroTitle')
 
 function glitchTitle(){
 
+
+
   heroTitle.style.opacity = 0.6
+
+
 
   setTimeout(() => heroTitle.style.opacity = 1, 80)
 
@@ -551,31 +654,59 @@ const terminalContent = document.getElementById('terminalContent')
 
 const storyLines = [
 
+
+
   "My name is Ahmed Farouk but my friends who know me best call me Modie.",
+
+
 
   "I am a young technologist who originates from Alexandria, Egypt because technology represents more to me than just programming languages.",
 
+
+
   "The technology lets me design educational concepts which will transform how students learn and create and solve issues.",
+
+
 
   "My curiosity started my journey. I wanted to understand how things work—computers, robots, software, systems.",
 
+
+
   "The curiosity which I had developed led me to begin my work.",
+
+
 
   "I began learning programming languages like Python, C, C++, and JavaScript while creating projects and working on electronics and robotics through Arduino and Raspberry Pi.",
 
+
+
   "The Techno X Academy program I attended helped me build my programming and robotics abilities which I used to win first place.",
+
+
 
   "The Future Makers organization helped me develop as an instructor who now teaches upcoming innovators after I learned new skills and deepened my fundamental knowledge.",
 
+
+
   "I wanted to learn about the process which transforms concepts into practical outcomes.",
+
+
 
   "I studied Business and Entrepreneurship to prepare myself for launching my startup \"E3lan 3almashy\" which I will announce soon.",
 
+
+
   "My dedication extends beyond my own work because I aim to support others.",
+
+
 
   "My organization Adapt operates as a nonprofit organization which helps teenagers develop their STEM and freelancing and entrepreneurship skills through our resource and mentorship and future development programs.",
 
+
+
   "The project SOE – Save Our Environment motivates people to take small daily actions which protect our planet while they monitor their beneficial actions throughout the day.",
+
+
 
   "My current project COMMAND – The Future Vision of Education uses AI and Augmented Reality technology to create a platform that will enable children to access educational content."
 
@@ -587,33 +718,63 @@ let currentLine = 0
 
 function typeTerminal(){
 
+
+
   if(currentLine >= storyLines.length) return
+
+
 
   let lineEl = document.createElement('div')
 
+
+
   lineEl.className = 'terminal-line'
+
+
 
   terminalContent.appendChild(lineEl)
 
+
+
   let text = storyLines[currentLine]
+
+
 
   let i = 0
 
+
+
   function typeChar(){
+
+
 
     if(i < text.length){
 
+
+
       lineEl.textContent += text.charAt(i)
+
+
 
       i++
 
+
+
       setTimeout(typeChar, 28 + Math.random()*22)
+
+
 
     } else {
 
+
+
       currentLine++
 
+
+
       setTimeout(typeTerminal, 420)
+
+
 
     }
 
@@ -655,11 +816,19 @@ class Seed {
 
   constructor(){
 
+
+
     this.x = Math.random() * gameCanvas.width
+
+
 
     this.y = -20
 
-    this.vy = 2.8 + Math.random() * 3.2
+
+
+    this.vy = 1.1 + Math.random() * 1.4
+
+
 
     this.size = 12
 
@@ -671,7 +840,11 @@ class Seed {
 
 function drawGame(){
 
+
+
   if(!gameRunning) return
+
+
 
   gCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height)
 
@@ -679,9 +852,15 @@ function drawGame(){
 
   gCtx.fillStyle = '#00ffee'
 
+
+
   gCtx.fillRect(basketX - 55, gameCanvas.height - 60, 110, 22)
 
+
+
   gCtx.fillStyle = '#ff00ff'
+
+
 
   gCtx.fillRect(basketX - 38, gameCanvas.height - 78, 76, 18)
 
@@ -689,15 +868,27 @@ function drawGame(){
 
   for(let i = 0; i < seeds.length; i++){
 
+
+
     let s = seeds[i]
+
+
 
     s.y += s.vy
 
+
+
     gCtx.fillStyle = '#00ffaa'
+
+
 
     gCtx.beginPath()
 
+
+
     gCtx.arc(s.x, s.y, s.size, 0, Math.PI*2)
+
+
 
     gCtx.fill()
 
@@ -705,15 +896,27 @@ function drawGame(){
 
     if(s.y > gameCanvas.height - 70 && s.y < gameCanvas.height - 40 && Math.abs(s.x - basketX) < 65){
 
+
+
       gameScore++
+
+
 
       scoreEl.textContent = gameScore
 
+
+
       seeds.splice(i,1)
+
+
 
       i--
 
+
+
       for(let k=0;k<6;k++){
+
+
 
         seeds.push({x:s.x, y:s.y, vy:-3-Math.random()*4, size:4})
 
@@ -725,23 +928,43 @@ function drawGame(){
 
     if(s.y > gameCanvas.height + 20){
 
+
+
       misses++
+
+
 
       missesEl.textContent = misses + '/8'
 
+
+
       seeds.splice(i,1)
+
+
 
       i--
 
+
+
       if(misses >= 8){
+
+
 
         gameRunning = false
 
+
+
         startBtn.style.display = 'inline-block'
+
+
 
         stopBtn.style.display = 'none'
 
+
+
         gameCanvas.style.display = 'none'
+
+
 
         alert("GAME OVER - Score: " + gameScore)
 
@@ -753,7 +976,9 @@ function drawGame(){
 
   
 
-  if(Math.random() < 0.035){
+  if(Math.random() < 0.028){
+
+
 
     seeds.push(new Seed())
 
@@ -769,13 +994,23 @@ function drawGame(){
 
 document.addEventListener('keydown', e => {
 
+
+
   if(!gameRunning) return
+
+
 
   if(e.key === 'ArrowLeft') basketX -= 28
 
+
+
   if(e.key === 'ArrowRight') basketX += 28
 
+
+
   if(basketX < 55) basketX = 55
+
+
 
   if(basketX > gameCanvas.width - 55) basketX = gameCanvas.width - 55
 
@@ -785,25 +1020,47 @@ document.addEventListener('keydown', e => {
 
 startBtn.addEventListener('click', () => {
 
+
+
   gameScore = 0
+
+
 
   misses = 0
 
+
+
   scoreEl.textContent = '0'
+
+
 
   missesEl.textContent = '0/8'
 
+
+
   seeds = []
+
+
 
   basketX = gameCanvas.width / 2
 
+
+
   gameRunning = true
+
+
 
   gameCanvas.style.display = 'block'
 
+
+
   startBtn.style.display = 'none'
 
+
+
   stopBtn.style.display = 'inline-block'
+
+
 
   drawGame()
 
@@ -813,11 +1070,19 @@ startBtn.addEventListener('click', () => {
 
 stopBtn.addEventListener('click', () => {
 
+
+
   gameRunning = false
+
+
 
   gameCanvas.style.display = 'none'
 
+
+
   stopBtn.style.display = 'none'
+
+
 
   startBtn.style.display = 'inline-block'
 
@@ -827,7 +1092,11 @@ stopBtn.addEventListener('click', () => {
 
 window.addEventListener('resize', () => {
 
+
+
   bgCanvas.width = window.innerWidth
+
+
 
   bgCanvas.height = window.innerHeight
 
@@ -837,23 +1106,43 @@ window.addEventListener('resize', () => {
 
 document.addEventListener('keydown', e => {
 
+
+
   if(e.key.toLowerCase() === 'r'){
+
+
 
     dustParticles = []
 
+
+
     for(let i = 0; i < 180; i++){
+
+
 
       dustParticles.push({
 
+
+
         x: Math.random() * bgCanvas.width,
+
+
 
         y: Math.random() * bgCanvas.height,
 
+
+
         vx: (Math.random() - 0.5) * 1.4,
+
+
 
         vy: (Math.random() - 0.5) * 1.4,
 
+
+
         size: Math.random() * 3 + 1
+
+
 
       })
 
@@ -867,41 +1156,77 @@ document.addEventListener('keydown', e => {
 
 setInterval(() => {
 
+
+
   if(gameRunning && gameScore >= 30){
+
+
 
     for(let i=0;i<80;i++){
 
+
+
       let c = document.createElement('div')
+
+
 
       c.style.position = 'fixed'
 
+
+
       c.style.left = Math.random()*100 + 'vw'
+
+
 
       c.style.top = '-20px'
 
+
+
       c.style.width = '10px'
+
+
 
       c.style.height = '10px'
 
+
+
       c.style.background = ['#00ffee','#ff00ff','#00ffaa'][Math.floor(Math.random()*3)]
+
+
 
       c.style.zIndex = 99999
 
+
+
       document.body.appendChild(c)
+
+
 
       let fall = Math.random()*3000 + 2000
 
+
+
       c.animate([
+
+
 
         {transform:'translateY(0) rotate(0deg)', opacity:1},
 
+
+
         {transform:`translateY(${window.innerHeight+100}px) rotate(${Math.random()*900}deg)`, opacity:0}
 
+
+
       ], fall)
+
+
 
       setTimeout(() => c.remove(), fall)
 
     }
+
+
 
     gameScore = 0
 
