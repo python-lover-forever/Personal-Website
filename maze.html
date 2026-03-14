@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>AHMED MAZE</title>
+
+<style>
+body {
+  margin:0;
+  background:#050505;
+  overflow:hidden;
+  font-family:monospace;
+  color:#e6ffff;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center
+}
+
+h1 {
+  margin:20px 0 10px;
+  font-size:2.2rem;
+  color:#00ffee;
+  text-shadow:0 0 12px #00ffee
+}
+
+canvas {
+  border:3px dashed #00ffee;
+  background:#0a0a0a;
+  border-radius:12px;
+  box-shadow:0 0 30px #00ffee44
+}
+
+p {
+  margin:15px 0;
+  font-size:1.1rem;
+  color:#00ffeeaa
+}
+</style>
+</head>
+
+<body>
+
+<h1>AHMED MAZE</h1>
+<p>Use arrow keys to move Ahmed to the goal</p>
+<canvas id="mazeCanvas" width="700" height="420"></canvas>
+<p>Hold R to see what will happen</p>
+
+<script>
+const canvas = document.getElementById('mazeCanvas')
+const ctx = canvas.getContext('2d')
+
+let playerX = 80
+let playerY = 80
+let goalX = 620
+let goalY = 360
+
+const walls = [
+  {x:140,y:0,w:20,h:200},
+  {x:260,y:140,w:20,h:280},
+  {x:380,y:0,w:20,h:160},
+  {x:500,y:180,w:20,h:240},
+  {x:0,y:100,w:140,h:20},
+  {x:180,y:260,w:140,h:20},
+  {x:340,y:80,w:140,h:20},
+  {x:480,y:300,w:140,h:20}
+]
+
+function drawMaze(){
+  ctx.clearRect(0,0,canvas.width,canvas.height)
+  
+  ctx.fillStyle = '#ff0066'
+  walls.forEach(w => {
+    ctx.fillRect(w.x,w.y,w.w,w.h)
+  })
+  
+  ctx.fillStyle = '#00ffee'
+  ctx.beginPath()
+  ctx.arc(playerX,playerY,16,0,Math.PI*2)
+  ctx.fill()
+  
+  ctx.fillStyle = '#000'
+  ctx.font = '10px monospace'
+  ctx.textAlign = 'center'
+  ctx.fillText('AHMED',playerX,playerY+4)
+  
+  ctx.fillStyle = '#00ff88'
+  ctx.fillRect(goalX,goalY,34,34)
+  ctx.fillStyle = '#000'
+  ctx.font = '12px monospace'
+  ctx.fillText('GOAL',goalX+17,goalY+23)
+}
+
+function checkCollision(newX,newY){
+  let size = 16
+  for(let w of walls){
+    if(
+      newX - size < w.x + w.w &&
+      newX + size > w.x &&
+      newY - size < w.y + w.h &&
+      newY + size > w.y
+    ){
+      return true
+    }
+  }
+  return false
+}
+
+document.addEventListener('keydown', e => {
+  let step = 12
+  let newX = playerX
+  let newY = playerY
+  
+  if(e.key === 'ArrowLeft') newX -= step
+  if(e.key === 'ArrowRight') newX += step
+  if(e.key === 'ArrowUp') newY -= step
+  if(e.key === 'ArrowDown') newY += step
+  
+  if(!checkCollision(newX,newY)){
+    playerX = newX
+    playerY = newY
+  }
+  
+  if(playerX < 20) playerX = 20
+  if(playerX > canvas.width - 20) playerX = canvas.width - 20
+  if(playerY < 20) playerY = 20
+  if(playerY > canvas.height - 20) playerY = canvas.height - 20
+  
+  if(Math.abs(playerX - goalX) < 28 && Math.abs(playerY - goalY) < 28){
+    alert("YOU DID IT! Ahmed reached the goal!")
+    playerX = 80
+    playerY = 80
+  }
+  
+  drawMaze()
+})
+
+drawMaze()
+
+document.addEventListener('keydown', e => {
+  if(e.key.toLowerCase() === 'r'){
+    alert("R key pressed! Dust particles reset (but only visible on main page)")
+  }
+})
+</script>
+
+</body>
+</html>
