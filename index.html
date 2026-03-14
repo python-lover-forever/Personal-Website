@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -138,37 +136,38 @@ color:#00ffcc
 }
 
 #gameContainer{
-position:fixed;
 width:94%;
 max-width:1100px;
-margin:60px auto 0
+margin:80px auto 120px auto;
+text-align:center;
+position:relative
 }
 
 #gameCanvas{
 border:3px dashed #00ffee;
 background:#0a0a0a;
 border-radius:12px;
-display:block
+width:100%;
+max-width:700px;
+height:420px;
+display:block;
+margin:20px auto 0 auto
 }
 
 #gameUI{
-position:fixed;
-top:-25px;
-left:15px;
 color:#00ffee;
 font-size:1.3rem;
-pointer-events:none;
-z-index:10
+margin-bottom:12px
 }
 
 #startBtn,#stopBtn{
 background:#00ffee;
 color:#050505;
 border:none;
-padding:14px 32px;
-font-size:1.1rem;
+padding:12px 28px;
+font-size:1.05rem;
 cursor:pointer;
-margin:20px 10px 0;
+margin:15px 8px;
 border-radius:4px;
 transition:0.3s
 }
@@ -181,7 +180,14 @@ display:none
 #startBtn:hover,#stopBtn:hover{
 background:#ff00ff;
 color:#fff;
-transform:scale(1.1)
+transform:scale(1.08)
+}
+
+#gameNote{
+font-size:0.95rem;
+color:#00ffee88;
+margin:15px 0 30px 0;
+display:block
 }
 
 #contact{
@@ -189,7 +195,7 @@ background:#0b0b0b;
 border:2px solid #00ffee;
 padding:50px;
 max-width:700px;
-margin:40px auto
+margin:60px auto 80px auto
 }
 
 .contact-info a{
@@ -221,13 +227,6 @@ background:linear-gradient(to right,#00ffee,#ff00ff);
 z-index:9999;
 width:0%;
 transition:width 0.1s
-}
-
-#gameNote{
-font-size:0.95rem;
-color:#00ffee88;
-margin-top:15px;
-text-align:center
 }
 </style>
 </head>
@@ -308,9 +307,11 @@ text-align:center
 <div>
 <h2>AHMED MAZE</h2>
 <p>use arrow keys to move Ahmed to the goal</p>
+
 <div id="gameContainer">
-<canvas id="gameCanvas" width="1100" height="520"></canvas>
+<button id="startBtn">START MAZE</button>
 <div id="gameNote">Hold R to see what will happen</div>
+<canvas id="gameCanvas" width="700" height="420"></canvas>
 </div>
 </div>
 </section>
@@ -456,19 +457,17 @@ const mazeCanvas = document.getElementById('gameCanvas')
 const mCtx = mazeCanvas.getContext('2d')
 let playerX = 80
 let playerY = 80
-let goalX = 980
-let goalY = 420
+let goalX = 620
+let goalY = 360
 let walls = [
-  {x:200,y:0,w:20,h:280},
-  {x:300,y:180,w:20,h:340},
-  {x:420,y:0,w:20,h:220},
-  {x:540,y:220,w:20,h:300},
-  {x:660,y:0,w:20,h:180},
-  {x:780,y:260,w:20,h:260},
-  {x:0,y:140,w:180,h:20},
-  {x:220,y:340,w:180,h:20},
-  {x:460,y:120,w:160,h:20},
-  {x:700,y:380,w:160,h:20}
+  {x:140,y:0,w:20,h:200},
+  {x:260,y:140,w:20,h:280},
+  {x:380,y:0,w:20,h:160},
+  {x:500,y:180,w:20,h:240},
+  {x:0,y:100,w:140,h:20},
+  {x:180,y:260,w:140,h:20},
+  {x:340,y:80,w:140,h:20},
+  {x:480,y:300,w:140,h:20}
 ]
 
 function drawMaze(){
@@ -481,23 +480,23 @@ function drawMaze(){
   
   mCtx.fillStyle = '#00ffee'
   mCtx.beginPath()
-  mCtx.arc(playerX,playerY,18,0,Math.PI*2)
+  mCtx.arc(playerX,playerY,16,0,Math.PI*2)
   mCtx.fill()
   
   mCtx.fillStyle = '#000'
-  mCtx.font = '11px monospace'
+  mCtx.font = '10px monospace'
   mCtx.textAlign = 'center'
-  mCtx.fillText('AHMED',playerX,playerY+5)
+  mCtx.fillText('AHMED',playerX,playerY+4)
   
   mCtx.fillStyle = '#00ff88'
-  mCtx.fillRect(goalX,goalY,38,38)
+  mCtx.fillRect(goalX,goalY,34,34)
   mCtx.fillStyle = '#000'
-  mCtx.font = '14px monospace'
-  mCtx.fillText('GOAL',goalX+19,goalY+26)
+  mCtx.font = '12px monospace'
+  mCtx.fillText('GOAL',goalX+17,goalY+23)
 }
 
 function checkCollision(newX,newY){
-  let size = 18
+  let size = 16
   for(let w of walls){
     if(
       newX - size < w.x + w.w &&
@@ -512,7 +511,7 @@ function checkCollision(newX,newY){
 }
 
 document.addEventListener('keydown', e => {
-  let step = 14
+  let step = 12
   let newX = playerX
   let newY = playerY
   
@@ -531,7 +530,7 @@ document.addEventListener('keydown', e => {
   if(playerY < 20) playerY = 20
   if(playerY > mazeCanvas.height - 20) playerY = mazeCanvas.height - 20
   
-  if(Math.abs(playerX - goalX) < 30 && Math.abs(playerY - goalY) < 30){
+  if(Math.abs(playerX - goalX) < 28 && Math.abs(playerY - goalY) < 28){
     alert("YOU DID IT! Ahmed reached the goal!")
     playerX = 80
     playerY = 80
