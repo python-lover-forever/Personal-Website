@@ -52,20 +52,25 @@ p {
 const canvas = document.getElementById('mazeCanvas')
 const ctx = canvas.getContext('2d')
 
-let playerX = 80
-let playerY = 80
-let goalX = 620
+let playerX = 60
+let playerY = 60
+let goalX = 640
 let goalY = 360
 
+// Redesigned solvable maze (paths are open now)
 const walls = [
-  {x:140,y:0,w:20,h:200},
-  {x:260,y:140,w:20,h:280},
-  {x:380,y:0,w:20,h:160},
-  {x:500,y:180,w:20,h:240},
-  {x:0,y:100,w:140,h:20},
-  {x:180,y:260,w:140,h:20},
-  {x:340,y:80,w:140,h:20},
-  {x:480,y:300,w:140,h:20}
+  // Vertical walls
+  {x:180,y:0,w:20,h:140},
+  {x:180,y:260,w:20,h:160},
+  {x:300,y:100,w:20,h:220},
+  {x:420,y:0,w:20,h:180},
+  {x:540,y:180,w:20,h:240},
+  
+  // Horizontal walls
+  {x:0,y:180,w:160,h:20},
+  {x:220,y:340,w:160,h:20},
+  {x:380,y:80,w:160,h:20},
+  {x:540,y:260,w:160,h:20}
 ]
 
 function drawMaze(){
@@ -73,27 +78,27 @@ function drawMaze(){
   
   ctx.fillStyle = '#ff0066'
   walls.forEach(w => {
-    ctx.fillRect(w.x,w.y,w.w,w.h)
+    ctx.fillRect(w.x, w.y, w.w, w.h)
   })
   
   ctx.fillStyle = '#00ffee'
   ctx.beginPath()
-  ctx.arc(playerX,playerY,16,0,Math.PI*2)
+  ctx.arc(playerX, playerY, 16, 0, Math.PI*2)
   ctx.fill()
   
   ctx.fillStyle = '#000'
   ctx.font = '10px monospace'
   ctx.textAlign = 'center'
-  ctx.fillText('AHMED',playerX,playerY+4)
+  ctx.fillText('AHMED', playerX, playerY + 4)
   
   ctx.fillStyle = '#00ff88'
-  ctx.fillRect(goalX,goalY,34,34)
+  ctx.fillRect(goalX, goalY, 34, 34)
   ctx.fillStyle = '#000'
   ctx.font = '12px monospace'
-  ctx.fillText('GOAL',goalX+17,goalY+23)
+  ctx.fillText('GOAL', goalX + 17, goalY + 23)
 }
 
-function checkCollision(newX,newY){
+function checkCollision(newX, newY){
   let size = 16
   for(let w of walls){
     if(
@@ -118,20 +123,22 @@ document.addEventListener('keydown', e => {
   if(e.key === 'ArrowUp') newY -= step
   if(e.key === 'ArrowDown') newY += step
   
-  if(!checkCollision(newX,newY)){
+  if(!checkCollision(newX, newY)){
     playerX = newX
     playerY = newY
   }
   
+  // Keep player inside canvas
   if(playerX < 20) playerX = 20
   if(playerX > canvas.width - 20) playerX = canvas.width - 20
   if(playerY < 20) playerY = 20
   if(playerY > canvas.height - 20) playerY = canvas.height - 20
   
+  // Check if reached goal
   if(Math.abs(playerX - goalX) < 28 && Math.abs(playerY - goalY) < 28){
     alert("YOU DID IT! Ahmed reached the goal!")
-    playerX = 80
-    playerY = 80
+    playerX = 60
+    playerY = 60
   }
   
   drawMaze()
@@ -139,9 +146,10 @@ document.addEventListener('keydown', e => {
 
 drawMaze()
 
+// R key easter egg
 document.addEventListener('keydown', e => {
   if(e.key.toLowerCase() === 'r'){
-    alert("R key pressed! Dust particles reset (but only visible on main page)")
+    alert("R key pressed! Dust particles reset (visible on main page only)")
   }
 })
 </script>
