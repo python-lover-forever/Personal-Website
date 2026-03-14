@@ -41,12 +41,10 @@ box-shadow:0 0 12px #00ffee
 nav{
 position:fixed;
 top:0;
-  
 width:100%;
 display:flex;
 justify-content:center;
 gap:50px;
-  
 background:rgba(0,0,0,0.85);
 padding:19px;
 z-index:9998;
@@ -120,13 +118,11 @@ background:#000;
 border:3px solid #00ffee;
 padding:25px;
 font-family:monospace;
-  
 text-align:left;
 max-width:820px;
 margin:0 auto;
 color:#00ffee;
 box-shadow:0 0 40px #00ffee44;
-  
 overflow:hidden;
 height:480px;
 position:relative
@@ -151,7 +147,6 @@ margin:60px auto 0
 #gameCanvas{
 border:3px dashed #00ffee;
 background:#0a0a0a;
-  
 border-radius:12px;
 display:block
 }
@@ -176,8 +171,6 @@ cursor:pointer;
 margin:20px 10px 0;
 border-radius:4px;
 transition:0.3s
-
-  
 }
 
 #stopBtn{
@@ -188,7 +181,6 @@ display:none
 #startBtn:hover,#stopBtn:hover{
 background:#ff00ff;
 color:#fff;
-  
 transform:scale(1.1)
 }
 
@@ -209,13 +201,11 @@ text-decoration:none
 position:fixed;
 bottom:45px;
 right:45px;
-  
 background:#00ffee;
 color:#000;
 border:none;
 padding:16px 22px;
 border-radius:50%;
-  
 font-size:32px;
 cursor:pointer;
 box-shadow:0 0 25px #00ffee99;
@@ -227,17 +217,18 @@ position:fixed;
 top:0;
 left:0;
 height:4px;
-  
 background:linear-gradient(to right,#00ffee,#ff00ff);
 z-index:9999;
 width:0%;
-transition:width 0.1s}
+transition:width 0.1s
+}
 
 #gameNote{
 font-size:0.95rem;
 color:#00ffee88;
 margin-top:15px;
-text-align:center}
+text-align:center
+}
 </style>
 </head>
 
@@ -251,7 +242,6 @@ text-align:center}
 <a href="#hero">HOME</a>
 <a href="#story">STORY.EXE</a>
 <a href="#skills">SKILLS</a>
-  
 <a href="#projects">PROJECTS</a>
 <a href="#game">PLANTER GAME</a>
 <a href="#contact">CONTACT</a>
@@ -481,7 +471,7 @@ class Seed {
   constructor(){
     this.x = Math.random() * gameCanvas.width
     this.y = -20
-    this.vy = 1.1 + Math.random() * 1.4
+    this.vy = 0.9 + Math.random() * 1.1
     this.size = 12
   }
 }
@@ -527,7 +517,7 @@ function drawGame(){
     }
   }
   
-  if(Math.random() < 0.028){
+  if(Math.random() < 0.022){
     seeds.push(new Seed())
   }
   
