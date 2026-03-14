@@ -128,52 +128,25 @@ section {
 
 .prompt {color:#00ffcc}
 
-#gameContainer {
-  width:94%;
-  max-width:1100px;
-  margin:60px auto 140px auto;
-  text-align:center
-}
-
-#gameCanvas {
-  border:3px dashed #00ffee;
-  background:#0a0a0a;
-  border-radius:12px;
-  width:100%;
-  max-width:700px;
-  height:420px;
-  display:block;
-  margin:35px auto 0 auto
-}
-
-#gameNote {
-  font-size:0.95rem;
-  color:#00ffee88;
-  margin:15px 0 25px 0;
-  display:block
-}
-
-#startBtn, #stopBtn {
+#playGameBtn {
   background:#00ffee;
   color:#050505;
   border:none;
-  padding:12px 28px;
-  font-size:1.05rem;
+  padding:18px 48px;
+  font-size:1.4rem;
+  font-weight:bold;
   cursor:pointer;
-  margin:15px 8px;
-  border-radius:4px;
-  transition:0.3s
+  margin:40px 0;
+  border-radius:8px;
+  transition:0.3s;
+  box-shadow:0 0 20px #00ffee66
 }
 
-#stopBtn {
-  background:#ff00aa;
-  display:none
-}
-
-#startBtn:hover, #stopBtn:hover {
+#playGameBtn:hover {
   background:#ff00ff;
   color:#fff;
-  transform:scale(1.08)
+  transform:scale(1.12);
+  box-shadow:0 0 40px #ff00ff88
 }
 
 #contact {
@@ -291,13 +264,11 @@ section {
 <section id="game">
 <div>
 <h2>AHMED MAZE</h2>
-<p>use arrow keys to move Ahmed to the goal</p>
+<p>Help Ahmed reach the goal in the maze</p>
 
-<div id="gameContainer">
-<button id="startBtn">START MAZE</button>
-<div id="gameNote">Hold R to see what will happen</div>
-<canvas id="gameCanvas" width="700" height="420"></canvas>
-</div>
+<button id="playGameBtn">PLAY THE GAME</button>
+
+<div id="gameNote">Hold R on the game page to see what will happen</div>
 </div>
 </section>
 
@@ -438,93 +409,9 @@ function typeTerminal(){
 }
 setTimeout(typeTerminal, 800)
 
-const mazeCanvas = document.getElementById('gameCanvas')
-const mCtx = mazeCanvas.getContext('2d')
-let playerX = 80
-let playerY = 80
-let goalX = 620
-let goalY = 360
-let walls = [
-  {x:140,y:0,w:20,h:200},
-  {x:260,y:140,w:20,h:280},
-  {x:380,y:0,w:20,h:160},
-  {x:500,y:180,w:20,h:240},
-  {x:0,y:100,w:140,h:20},
-  {x:180,y:260,w:140,h:20},
-  {x:340,y:80,w:140,h:20},
-  {x:480,y:300,w:140,h:20}
-]
-
-function drawMaze(){
-  mCtx.clearRect(0,0,mazeCanvas.width,mazeCanvas.height)
-  
-  mCtx.fillStyle = '#ff0066'
-  walls.forEach(w => {
-    mCtx.fillRect(w.x,w.y,w.w,w.h)
-  })
-  
-  mCtx.fillStyle = '#00ffee'
-  mCtx.beginPath()
-  mCtx.arc(playerX,playerY,16,0,Math.PI*2)
-  mCtx.fill()
-  
-  mCtx.fillStyle = '#000'
-  mCtx.font = '10px monospace'
-  mCtx.textAlign = 'center'
-  mCtx.fillText('AHMED',playerX,playerY+4)
-  
-  mCtx.fillStyle = '#00ff88'
-  mCtx.fillRect(goalX,goalY,34,34)
-  mCtx.fillStyle = '#000'
-  mCtx.font = '12px monospace'
-  mCtx.fillText('GOAL',goalX+17,goalY+23)
-}
-
-function checkCollision(newX,newY){
-  let size = 16
-  for(let w of walls){
-    if(
-      newX - size < w.x + w.w &&
-      newX + size > w.x &&
-      newY - size < w.y + w.h &&
-      newY + size > w.y
-    ){
-      return true
-    }
-  }
-  return false
-}
-
-document.addEventListener('keydown', e => {
-  let step = 12
-  let newX = playerX
-  let newY = playerY
-  
-  if(e.key === 'ArrowLeft') newX -= step
-  if(e.key === 'ArrowRight') newX += step
-  if(e.key === 'ArrowUp') newY -= step
-  if(e.key === 'ArrowDown') newY += step
-  
-  if(!checkCollision(newX,newY)){
-    playerX = newX
-    playerY = newY
-  }
-  
-  if(playerX < 20) playerX = 20
-  if(playerX > mazeCanvas.width - 20) playerX = mazeCanvas.width - 20
-  if(playerY < 20) playerY = 20
-  if(playerY > mazeCanvas.height - 20) playerY = mazeCanvas.height - 20
-  
-  if(Math.abs(playerX - goalX) < 28 && Math.abs(playerY - goalY) < 28){
-    alert("YOU DID IT! Ahmed reached the goal!")
-    playerX = 80
-    playerY = 80
-  }
-  
-  drawMaze()
+document.getElementById('playGameBtn').addEventListener('click', () => {
+  window.open('maze.html', '_blank')
 })
-
-drawMaze()
 
 window.addEventListener('resize', () => {
   bgCanvas.width = window.innerWidth
