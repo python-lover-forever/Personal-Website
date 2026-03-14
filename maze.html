@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <title>AHMED MAZE</title>
-
 <style>
 body {
   margin:0;
   background:#050505;
+  
   overflow:hidden;
   font-family:monospace;
   color:#e6ffff;
@@ -18,14 +17,11 @@ body {
   align-items:center;
   justify-content:center
 }
-
 h1 {
   margin:20px 0 10px;
   font-size:2.2rem;
   color:#00ffee;
-  text-shadow:0 0 12px #00ffee
-}
-
+  text-shadow:0 0 12px #00ffee}
 canvas {
   border:3px dashed #00ffee;
   background:#0a0a0a;
@@ -36,18 +32,18 @@ canvas {
 p {
   margin:15px 0;
   font-size:1.1rem;
+  
   color:#00ffeeaa
 }
 </style>
+  
 </head>
 
 <body>
-
 <h1>AHMED MAZE</h1>
 <p>Use arrow keys to move Ahmed to the goal</p>
 <canvas id="mazeCanvas" width="700" height="420"></canvas>
 <p>Hold R to see what will happen</p>
-
 <script>
 const canvas = document.getElementById('mazeCanvas')
 const ctx = canvas.getContext('2d')
@@ -56,23 +52,20 @@ let playerX = 60
 let playerY = 60
 let goalX = 640
 let goalY = 360
-
-// Redesigned solvable maze (paths are open now)
 const walls = [
-  // Vertical walls
   {x:180,y:0,w:20,h:140},
   {x:180,y:260,w:20,h:160},
   {x:300,y:100,w:20,h:220},
   {x:420,y:0,w:20,h:180},
   {x:540,y:180,w:20,h:240},
-  
-  // Horizontal walls
   {x:0,y:180,w:160,h:20},
   {x:220,y:340,w:160,h:20},
   {x:380,y:80,w:160,h:20},
 ]
 
 function drawMaze(){
+
+  
   ctx.clearRect(0,0,canvas.width,canvas.height)
   
   ctx.fillStyle = '#ff0066'
@@ -84,12 +77,10 @@ function drawMaze(){
   ctx.beginPath()
   ctx.arc(playerX, playerY, 16, 0, Math.PI*2)
   ctx.fill()
-  
   ctx.fillStyle = '#000'
   ctx.font = '10px monospace'
   ctx.textAlign = 'center'
   ctx.fillText('AHMED', playerX, playerY + 4)
-  
   ctx.fillStyle = '#00ff88'
   ctx.fillRect(goalX, goalY, 34, 34)
   ctx.fillStyle = '#000'
@@ -127,30 +118,18 @@ document.addEventListener('keydown', e => {
     playerY = newY
   }
   
-  // Keep player inside canvas
   if(playerX < 20) playerX = 20
   if(playerX > canvas.width - 20) playerX = canvas.width - 20
   if(playerY < 20) playerY = 20
   if(playerY > canvas.height - 20) playerY = canvas.height - 20
-  
-  // Check if reached goal
-  if(Math.abs(playerX - goalX) < 28 && Math.abs(playerY - goalY) < 28){
+    if(Math.abs(playerX - goalX) < 28 && Math.abs(playerY - goalY) < 28){
     alert("YOU DID IT! Ahmed reached the goal!")
     playerX = 60
     playerY = 60
   }
-  
   drawMaze()
 })
-
 drawMaze()
-
-// R key easter egg
-document.addEventListener('keydown', e => {
-  if(e.key.toLowerCase() === 'r'){
-    alert("R key pressed! Dust particles reset (visible on main page only)")
-  }
-})
 </script>
 
 </body>
