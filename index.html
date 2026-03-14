@@ -243,7 +243,7 @@ text-align:center
 <a href="#story">STORY.EXE</a>
 <a href="#skills">SKILLS</a>
 <a href="#projects">PROJECTS</a>
-<a href="#game">PLANTER GAME</a>
+<a href="#game">AHMED MAZE</a>
 <a href="#contact">CONTACT</a>
 </nav>
 
@@ -306,14 +306,11 @@ text-align:center
 
 <section id="game">
 <div>
-<h2>PLANTER ROBOT COLLECTOR</h2>
-<p>move the robot with arrows and catch falling seeds</p>
+<h2>AHMED MAZE</h2>
+<p>use arrow keys to move Ahmed to the goal</p>
 <div id="gameContainer">
-<button id="startBtn">START GAME</button>
-<button id="stopBtn">STOP GAME</button>
-<div id="gameNote">Hold R to see what will happen</div>
 <canvas id="gameCanvas" width="1100" height="520"></canvas>
-<div id="gameUI">SCORE: <span id="score">0</span> | MISSES: <span id="misses">0</span>/8</div>
+<div id="gameNote">Hold R to see what will happen</div>
 </div>
 </div>
 </section>
@@ -455,101 +452,95 @@ function typeTerminal(){
 }
 setTimeout(typeTerminal, 800)
 
-const gameCanvas = document.getElementById('gameCanvas')
-const gCtx = gameCanvas.getContext('2d')
-const scoreEl = document.getElementById('score')
-const missesEl = document.getElementById('misses')
-const startBtn = document.getElementById('startBtn')
-const stopBtn = document.getElementById('stopBtn')
-let gameScore = 0
-let misses = 0
-let seeds = []
-let basketX = gameCanvas.width / 2
-let gameRunning = false
+const mazeCanvas = document.getElementById('gameCanvas')
+const mCtx = mazeCanvas.getContext('2d')
+let playerX = 80
+let playerY = 80
+let goalX = 980
+let goalY = 420
+let walls = [
+  {x:200,y:0,w:20,h:280},
+  {x:300,y:180,w:20,h:340},
+  {x:420,y:0,w:20,h:220},
+  {x:540,y:220,w:20,h:300},
+  {x:660,y:0,w:20,h:180},
+  {x:780,y:260,w:20,h:260},
+  {x:0,y:140,w:180,h:20},
+  {x:220,y:340,w:180,h:20},
+  {x:460,y:120,w:160,h:20},
+  {x:700,y:380,w:160,h:20}
+]
 
-class Seed {
-  constructor(){
-    this.x = Math.random() * gameCanvas.width
-    this.y = -20
-    this.vy = 0.9 + Math.random() * 1.1
-    this.size = 12
-  }
+function drawMaze(){
+  mCtx.clearRect(0,0,mazeCanvas.width,mazeCanvas.height)
+  
+  mCtx.fillStyle = '#ff0066'
+  walls.forEach(w => {
+    mCtx.fillRect(w.x,w.y,w.w,w.h)
+  })
+  
+  mCtx.fillStyle = '#00ffee'
+  mCtx.beginPath()
+  mCtx.arc(playerX,playerY,18,0,Math.PI*2)
+  mCtx.fill()
+  
+  mCtx.fillStyle = '#000'
+  mCtx.font = '11px monospace'
+  mCtx.textAlign = 'center'
+  mCtx.fillText('AHMED',playerX,playerY+5)
+  
+  mCtx.fillStyle = '#00ff88'
+  mCtx.fillRect(goalX,goalY,38,38)
+  mCtx.fillStyle = '#000'
+  mCtx.font = '14px monospace'
+  mCtx.fillText('GOAL',goalX+19,goalY+26)
 }
 
-function drawGame(){
-  if(!gameRunning) return
-  gCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height)
-  
-  gCtx.fillStyle = '#00ffee'
-  gCtx.fillRect(basketX - 55, gameCanvas.height - 60, 110, 22)
-  gCtx.fillStyle = '#ff00ff'
-  gCtx.fillRect(basketX - 38, gameCanvas.height - 78, 76, 18)
-  
-  for(let i = 0; i < seeds.length; i++){
-    let s = seeds[i]
-    s.y += s.vy
-    gCtx.fillStyle = '#00ffaa'
-    gCtx.beginPath()
-    gCtx.arc(s.x, s.y, s.size, 0, Math.PI*2)
-    gCtx.fill()
-    
-    if(s.y > gameCanvas.height - 70 && s.y < gameCanvas.height - 40 && Math.abs(s.x - basketX) < 65){
-      gameScore++
-      scoreEl.textContent = gameScore
-      seeds.splice(i,1)
-      i--
-      for(let k=0;k<6;k++){
-        seeds.push({x:s.x, y:s.y, vy:-3-Math.random()*4, size:4})
-      }
-    }
-    
-    if(s.y > gameCanvas.height + 20){
-      misses++
-      missesEl.textContent = misses + '/8'
-      seeds.splice(i,1)
-      i--
-      if(misses >= 8){
-        gameRunning = false
-        startBtn.style.display = 'inline-block'
-        stopBtn.style.display = 'none'
-        alert("GAME OVER - Score: " + gameScore)
-      }
+function checkCollision(newX,newY){
+  let size = 18
+  for(let w of walls){
+    if(
+      newX - size < w.x + w.w &&
+      newX + size > w.x &&
+      newY - size < w.y + w.h &&
+      newY + size > w.y
+    ){
+      return true
     }
   }
-  
-  if(Math.random() < 0.022){
-    seeds.push(new Seed())
-  }
-  
-  requestAnimationFrame(drawGame)
+  return false
 }
 
 document.addEventListener('keydown', e => {
-  if(!gameRunning) return
-  if(e.key === 'ArrowLeft') basketX -= 28
-  if(e.key === 'ArrowRight') basketX += 28
-  if(basketX < 55) basketX = 55
-  if(basketX > gameCanvas.width - 55) basketX = gameCanvas.width - 55
+  let step = 14
+  let newX = playerX
+  let newY = playerY
+  
+  if(e.key === 'ArrowLeft') newX -= step
+  if(e.key === 'ArrowRight') newX += step
+  if(e.key === 'ArrowUp') newY -= step
+  if(e.key === 'ArrowDown') newY += step
+  
+  if(!checkCollision(newX,newY)){
+    playerX = newX
+    playerY = newY
+  }
+  
+  if(playerX < 20) playerX = 20
+  if(playerX > mazeCanvas.width - 20) playerX = mazeCanvas.width - 20
+  if(playerY < 20) playerY = 20
+  if(playerY > mazeCanvas.height - 20) playerY = mazeCanvas.height - 20
+  
+  if(Math.abs(playerX - goalX) < 30 && Math.abs(playerY - goalY) < 30){
+    alert("YOU DID IT! Ahmed reached the goal!")
+    playerX = 80
+    playerY = 80
+  }
+  
+  drawMaze()
 })
 
-startBtn.addEventListener('click', () => {
-  gameScore = 0
-  misses = 0
-  scoreEl.textContent = '0'
-  missesEl.textContent = '0/8'
-  seeds = []
-  basketX = gameCanvas.width / 2
-  gameRunning = true
-  startBtn.style.display = 'none'
-  stopBtn.style.display = 'inline-block'
-  drawGame()
-})
-
-stopBtn.addEventListener('click', () => {
-  gameRunning = false
-  stopBtn.style.display = 'none'
-  startBtn.style.display = 'inline-block'
-})
+drawMaze()
 
 window.addEventListener('resize', () => {
   bgCanvas.width = window.innerWidth
@@ -570,29 +561,6 @@ document.addEventListener('keydown', e => {
     }
   }
 })
-
-setInterval(() => {
-  if(gameRunning && gameScore >= 30){
-    for(let i=0;i<80;i++){
-      let c = document.createElement('div')
-      c.style.position = 'fixed'
-      c.style.left = Math.random()*100 + 'vw'
-      c.style.top = '-20px'
-      c.style.width = '10px'
-      c.style.height = '10px'
-      c.style.background = ['#00ffee','#ff00ff','#00ffaa'][Math.floor(Math.random()*3)]
-      c.style.zIndex = 99999
-      document.body.appendChild(c)
-      let fall = Math.random()*3000 + 2000
-      c.animate([
-        {transform:'translateY(0) rotate(0deg)', opacity:1},
-        {transform:`translateY(${window.innerHeight+100}px) rotate(${Math.random()*900}deg)`, opacity:0}
-      ], fall)
-      setTimeout(() => c.remove(), fall)
-    }
-    gameScore = 0
-  }
-}, 400)
 </script>
 
 </body>
