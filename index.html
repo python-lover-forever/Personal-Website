@@ -1,185 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ahmed Farouk</title>
-<style>
-body {
-  background:#050505;
-  color:#e6ffff;
-  font-family:monospace;
-  margin:0;
-  overflow-x:hidden;
-  scroll-behavior:smooth;
-  cursor:none}
-canvas {
-  position:fixed;
-  top:0; left:0;
   
-  z-index:-1
-}
-
-.robotCursor {
-  position:fixed;
-  width:24px; height:24px;
-  border:3px solid #00ffee;
-  border-radius:6px;
-  pointer-events:none;
-  z-index:9999;
-  mix-blend-mode:difference;
-  box-shadow:0 0 12px #00ffee
-  
-}
-
-
-  
-nav {
-  position:fixed;
-  top:0; width:100%;
-  display:flex; justify-content:center; gap:50px;
-  background:rgba(0,0,0,0.85);
-  padding:19px;
-  z-index:9998;
-  backdrop-filter:blur(8px)
-}
-nav a {
-  color:#00ffee;
-  text-decoration:none;
-  font-size:1.2rem;
-  transition:0.2s
-}
-nav a:hover {
-  text-shadow:0 0 10px #00ffee}
-section {
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:90px 16%
-}
-
-.hero h1 {
-  font-size:72px;
-  margin:0;
-  animation:glitch 2s infinite
-}
-@keyframes glitch {
-  0% {text-shadow:2px 0 #00ffee,-2px 0 #ff00ff}
-  50% {text-shadow:-2px 0 #00ffee,2px 0 #ff00ff}
-}
-.hero h2 {color:#00ffee;font-size:1.9rem}
-.skills, .projects {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:30px;
-  margin-top:50px
-}
-.skill, .card {
-  border:2px solid #00ffee;
-  padding:26px;
-  background:#0b0b0b;
-  min-width:210px;
-  transition:all .35s ease
-}
-.card:hover {
-  transform:scale(1.04) translateY(-12px);
-  box-shadow:0 0 30px #00ffee66
-}
-.bar {
-  height:8px;
-  background:#00ffee;
-  width:0;
-  margin-top:14px;
-  transition:width 1.8s cubic-bezier(0.25,0.1,0.25,1)
-}
-#terminal {
-  background:#000;
-  border:3px solid #00ffee;
-  padding:25px;
-  font-family:monospace;
-  text-align:left;
-  max-width:820px;
-  margin:0 auto;
-  
-  color:#00ffee;
-  box-shadow:0 0 40px #00ffee44;
-  overflow:hidden;
-  height:480px;
-  position:relative
-}
-.terminal-line {
-  margin:4px 0;
-  white-space:pre-wrap
-}
-
-.prompt {color:#00ffcc}
-
-
-
-
-  
-#playGameBtn {
-  background:#00ffee;
-  color:#050505;
-  border:none;
-  padding:18px 48px;
-  font-size:1.4rem;
-  font-weight:bold;
-  cursor:pointer;
-  margin:40px 0;
-  border-radius:8px;
-  transition:0.3s;
-  box-shadow:0 0 20px #00ffee66
-} 
-#playGameBtn:hover {
-  background:#ff00ff;
-  color:#fff;
-  transform:scale(1.12);
-  box-shadow:0 0 40px #ff00ff88
-}
-
-#contact {
-  background:#0b0b0b;
-  border:2px solid #00ffee;
-  padding:50px;
-  max-width:700px;
-  margin:60px auto 80px auto
-}
-.contact-info a {
-  color:#00ffee;
-  text-decoration:none
-}
-.backToTop {
-  position:fixed;
-  
-  bottom:45px;
-  right:45px;
-  background:#00ffee;
-  color:#000;
-  border:none;
-  padding:16px 22px;
-  border-radius:50%;
-  font-size:32px;
-  cursor:pointer;
-  
-  box-shadow:0 0 25px #00ffee99;
-  z-index:9997
-}
-#progressBar {
-  position:fixed;
-  top:0; left:0;
-  height:4px;
-  background:linear-gradient(to right,#00ffee,#ff00ff);
-  z-index:9999;
-  width:0%;
-  transition:width 0.1s
-}
-</style>
-</head>
-
 <body>
 
 <canvas id="bgCanvas"></canvas>
@@ -197,6 +21,7 @@ section {
 <div>
 <h1 id="heroTitle">AHMED FAROUK</h1>
 <h2>ENTREPRENEUR || FULL‑STACK ENGINEER || MEDIA PRODUCER</h2>
+  
 <p>Founder of Adapt NGO & E3lan 3almashy • Building robots, code & communities from Alexandria, To the whole World</p>
 </div>
 </section>
@@ -205,6 +30,7 @@ section {
 <h2>STORY.EXE LOADING...</h2>
 <div id="terminal">
 <div class="terminal-line prompt">> modie@adapt-ngo:~$ cat cinematic_story.exe</div>
+  
 <div id="terminalContent"></div>
 </div>
 </div>
@@ -215,17 +41,20 @@ section {
 <div class="skills">
 <div class="skill">Python<div class="bar" data-v="72"></div></div>
 <div class="skill">JavaScript<div class="bar" data-v="80"></div></div>
+  
 <div class="skill">HTML<div class="bar" data-v="73"></div></div>
 <div class="skill">CSS<div class="bar" data-v="89"></div></div>
 <div class="skill">Flask<div class="bar" data-v="85"></div></div>
 <div class="skill">Robotics<div class="bar" data-v="82"></div></div>
 <div class="skill">Arduino<div class="bar" data-v="93"></div></div>
 <div class="skill">Raspberry Pi<div class="bar" data-v="88"></div></div>
+  
 <div class="skill">AI Concepts<div class="bar" data-v="76"></div></div>
 <div class="skill">Entrepreneurship<div class="bar" data-v="82"></div></div>
 <div class="skill">Business Strategy<div class="bar" data-v="91"></div></div>
 <div class="skill">Product Design<div class="bar" data-v="92"></div></div>
 <div class="skill">Creative Media<div class="bar" data-v="73"></div></div>
+  
 </div>
 </div>
 </section>
@@ -240,6 +69,7 @@ section {
 <div class="card"><h3>Planter Robot</h3><p>Autonomous robot planting seeds in sand</p></div>
 <div class="card"><h3>Mars Line Follower Robot</h3><p>Robot that plants and waters seeds</p></div>
 <div class="card"><h3>Python GUI ATM System</h3><p>Secure ATM simulation in Python</p></div>
+  
 <div class="card"><h3>Taskita App</h3><p>Productivity task management application</p></div>
 <div class="card"><h3>Future Education Vision</h3><p>AR + AI education system concept</p></div>
 <div class="card"><h3>Interactive Science Experiments</h3><p>Low-cost STEM experiments platform</p></div>
@@ -272,7 +102,6 @@ document.addEventListener('mousemove', e => {
   cursorBot.style.left = e.clientX + 'px'
   cursorBot.style.top = e.clientY + 'px'
 })
-
 const bgCanvas = document.getElementById('bgCanvas')
 const bgCtx = bgCanvas.getContext('2d')
 bgCanvas.width = window.innerWidth
