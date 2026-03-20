@@ -40,7 +40,7 @@ document.addEventListener('mousemove', e => {
     p.vy += dy * 0.000028
   })
 })
-document.querySelectorAll('.bar').forEach(bar => {
+document.querySelectorAll('.b').forEach(bar => {
   setTimeout(() => {
     bar.style.width = bar.dataset.v + '%'
   }, 800)
@@ -62,7 +62,7 @@ function robotBeep(){
   }
 }
 window.addEventListener('scroll', robotBeep)
-const progressBar = document.getElementById('progressBar')
+const progressBar = document.getElementById('pr')
 window.addEventListener('scroll', () => {
   let scrollTop = window.scrollY
   let docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight
@@ -124,16 +124,13 @@ window.addEventListener('resize', () => {
 })
 document.addEventListener('keydown', e => {
   if(e.key.toLowerCase() === 'r'){
-    
     dustParticles = []
     for(let i = 0; i < 180; i++){
       dustParticles.push({
         x: Math.random() * bgCanvas.width,
-        
         y: Math.random() * bgCanvas.height,
         vx: (Math.random() - 0.5) * 1.4,
         vy: (Math.random() - 0.5) * 1.4,
-        
         size: Math.random() * 3 + 1
       })
     }
