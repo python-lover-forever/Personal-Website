@@ -154,21 +154,23 @@ function typeTerminal(){
 
 setTimeout(typeTerminal, 800)
 
-const gameBtn = document.getElementById('btn')
+document.addEventListener('DOMContentLoaded', () => {
+  const gameBtn = document.getElementById('btn')
 
-if(gameBtn){
-  gameBtn.addEventListener('click', () => {
-    window.open('maze.html', '_blank')
-  })
-}
+  if(gameBtn){
+    gameBtn.addEventListener('click', () => {
+      window.open('maze.html', '_blank')
+    })
+  }
+})
 
 window.addEventListener('resize', () => {
   bgCanvas.width = window.innerWidth
   bgCanvas.height = window.innerHeight
 })
 
-document.addEventListener('keydown', e => {
-  if(e.key.toLowerCase() === 'r'){
+window.addEventListener('keydown', e => {
+  if(e.key && e.key.toLowerCase() === 'r'){
 
     dustParticles = []
 
